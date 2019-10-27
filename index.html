@@ -157,15 +157,21 @@
       </div>
       <div class="content">
         <h1 style="padding-top:20px;text-align: center">EJEMPLO, TUTORIAL.</h1>
-        <form action="">
+        <form>
           <fieldset >
             <legend>Datos de Usuario</legend>
             <label for="nombre">Nombre: </label>
             <input type="text" name="nombre" id="nombre">
-            <label for="contraseña">Contraseña: </label>
-            <input type="text" name="contraseña" id="constraseña" >
-            <input type="button" value="Guardar">
+            <label for="pass">Contraseña: </label>
+            <input type="text" name="pass" id="pass" >
+            <label for="tipo">Tipo:</label>
+            <select name="tipo" id="tipo">
+              <option value="Admin">Admin</option>
+              <option selected value="Limitado">Limitado</option>
+            </select>
+            <input type="button" onclick="insertardatos();" value="Guardar">
           </fieldset>
+        </form>
           <table align="center" border="1px">
             <thead>
               <th>id</th>
@@ -177,7 +183,7 @@
               
             </tbody>
           </table>
-        </form>
+        
         <!-- <div class="row">
           <div class="col-lg-4">
             <div class="card card-chart">
@@ -472,6 +478,8 @@
     </div>
   </div>
   <!--   Core JS Files   -->
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase.js"></script>
+  <script src="assets/js/funciones.js"></script>
   <script src="assets/js/core/jquery.min.js"></script>
   <script src="assets/js/core/popper.min.js"></script>
   <script src="assets/js/core/bootstrap.min.js"></script>
