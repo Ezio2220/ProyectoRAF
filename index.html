@@ -20,7 +20,7 @@
   <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 
-<body class="">
+<body class="" onload="consultar();">
   <div class="wrapper ">
     <div class="sidebar" data-color="orange">
       <!--
@@ -163,7 +163,7 @@
             <label for="nombre">Nombre: </label>
             <input type="text" name="nombre" id="nombre">
             <label for="pass">Contraseña: </label>
-            <input type="text" name="pass" id="pass" >
+            <input type="password" name="pass" id="pass" >
             <label for="tipo">Tipo:</label>
             <select name="tipo" id="tipo">
               <option value="Admin">Admin</option>
@@ -177,6 +177,7 @@
               <th>id</th>
               <th>Nombre</th>
               <th>Contraseña</th>
+              <th>tipo</th>
               <th>acciones</th>
             </thead>
             <tbody id="datos" >
