@@ -85,3 +85,24 @@ function insertardatos(){
      // bd.set(obj);
     }
 }
+function filltabla(id,nombre,contraseña,tipo){ //funcion para agregar filas de tabla mas rapido a usuarios
+  return "<tr>"+ "<td>"+id+"</td>"+"<td>"+nombre+"</td>"+
+  "<td>"+contraseña+"</td>" + "<td>"+tipo+"</td>" + "<td></td></tr>";
+
+}
+function fillparte(id,datos){ //funcion para rellenar partes de un html atravez de su id
+  document.getElementById(id).innerHTML += datos; //.innerhtml inserta datos con codigo html directamente
+}
+function consultar(){   ///funcion para consultar datos
+  var db = firebase.database().ref("Usuarios"); //se crea instancia de la base datos centrandonos en usuarios
+  db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
+    var aux = snap.val(); //se crea un auxiliar que tomara los datos de ese snap
+    var tabla = "";   //se crea la variable donde se guardara la tabla entera
+    for(var documento in aux){  //se hace un for por cada id dentro de usuarios osea por cada usuario
+       tabla+= filltabla(documento,aux[documento].Nombre, //a la variable tabla se agregara cada vez el id (Documento) seguido de sus demas elementos de cada id (usuario) existente en Usuarios
+        aux[documento].pass,aux[documento].tipo);
+    }
+    fillparte("datos",tabla);//finalmente se inserta en el html con la funcion creada
+    
+  });
+}
