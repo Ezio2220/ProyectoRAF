@@ -14,6 +14,40 @@
 function obtener(id){
   return document.getElementById(id).value;
 }
+//------------------------------------------------insertar  a cualquier tabla
+function insertarglobal(tbl,arreglo){
+var base = firebase.database().ref(tbl);
+var obj = new Object;
+for(var i=0;i<arreglo.length;i++){
+  obj[arreglo[i]]=obtener(arreglo[i]);
+}
+base.once("value",function(snap){
+ var aux = snap.val();
+  var n = 1;
+  id=tbl.substring(0,4);
+  for(var documento in aux){ 
+    n++;
+}
+if(n>=10000){
+  id+="0"+n;
+}else if(n>=1000){
+  id+="00"+n;
+}else if(n>=100){
+  id+="000"+n;
+}
+else if(n>=10){
+  id+="0000"+n;
+}
+else{
+  id+="00000"+n;
+}
+bd.child(id).set(obj);
+nowuiDashboard.showNotification('top','center',"<b>REGISTRO EXITOSO!</b>","success");
+setTimeout(function(){location.reload()},3000);
+});
+
+}
+
 //----------------------------funcion para agregar usuarios----------------------------
 function insertardatos(n1,n2,n3){
     var nombre = obtener(n1);
