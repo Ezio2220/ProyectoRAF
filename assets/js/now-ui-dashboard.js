@@ -141,7 +141,7 @@ nowuiDashboard = {
   },
 
   showNotification: function(from, align,text,cl) {//agrege el atributo texto para modificar el texto de las notificaciones
-    color = cl;       //agrege el color para tambien elegirlo
+    color = cl;       //agrege el color para tambien elegirlo //esto esta cambiado en el .min pero no lo comente alli xD
 
     $.notify({
       icon: "now-ui-icons ui-1_bell-53",
