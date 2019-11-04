@@ -90,6 +90,26 @@ function filltabla(id,nombre,contraseña,tipo){ //funcion para agregar filas de 
   "<td>"+contraseña+"</td>" + "<td>"+tipo+"</td>" + "<td></td></tr>";
 
 }
+function filltablav2(arreglo,tp,id){
+  var tbody;
+  tbody="<tr>";
+  for(var i=0;i<arreglo.length;i++){
+    tbody+="<td>"+arreglo[i]+"</td>";
+  }
+  if(tp){
+    tbody+="<td class='td-actions text-right'>"+
+    "<button id='U"+id+"' onclick='prueba(this.id);'  type='button' rel='tooltip' class='btn btn-success btn-sm btn-icon'>"+
+        "<i class='now-ui-icons ui-2_settings-90'></i> </button>"+
+    "<button id='D"+id+"' onclick='prueba(this.id);' type='button' rel='tooltip' class='btn btn-danger btn-sm btn-icon'>"+
+    "<i class='now-ui-icons ui-1_simple-remove'></i> </button>"+"</td>";
+  }
+  tbody+="</tr>";
+
+  return tbody;
+}
+function prueba(id){
+  alert(id);
+}
 function fillparte(id,datos){ //funcion para rellenar partes de un html atravez de su id
   document.getElementById(id).innerHTML += datos; //.innerhtml inserta datos con codigo html directamente
 }
@@ -98,11 +118,19 @@ function consultar(){   ///funcion para consultar datos
   db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
     var aux = snap.val(); //se crea un auxiliar que tomara los datos de ese snap
     var tabla = "";   //se crea la variable donde se guardara la tabla entera
+    var tmp;
     for(var documento in aux){  //se hace un for por cada id dentro de usuarios osea por cada usuario
-       tabla+= filltabla(documento,aux[documento].Nombre, //a la variable tabla se agregara cada vez el id (Documento) seguido de sus demas elementos de cada id (usuario) existente en Usuarios
-        aux[documento].pass,aux[documento].tipo);
+      tmp =Object.values(aux[documento]);
+      tmp[0]= documento;
+      console.log(tmp);
+     /*  tabla+= filltabla(documento,aux[documento].Nombre, //a la variable tabla se agregara cada vez el id (Documento) seguido de sus demas elementos de cada id (usuario) existente en Usuarios
+        aux[documento].pass,aux[documento].tipo);*/
+        tabla += filltablav2(tmp,1,documento);
     }
     fillparte("datos",tabla);//finalmente se inserta en el html con la funcion creada
     
   });
+}
+function consultarglobal(tbl){
+alert("en proceso");
 }
