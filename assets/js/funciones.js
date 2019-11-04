@@ -15,10 +15,10 @@ function obtener(id){
   return document.getElementById(id).value;
 }
 //----------------------------funcion para agregar usuarios----------------------------
-function insertardatos(){
-    var nombre = obtener("nombre");
-    var contraseña = obtener("pass");//se obtienen los datos del formulariio
-    var tipo = obtener("tipo");
+function insertardatos(n1,n2,n3){
+    var nombre = obtener(n1);
+    var contraseña = obtener(n2);//se obtienen los datos del formulariio
+    var tipo = obtener(n3);
     if(nombre.length==0 || contraseña.length==0 ){
         alert("rellene todos los campos");  //se verifica primero que todos los campos esten llenos
     }else{
@@ -106,9 +106,48 @@ function filltablav2(arreglo,tp,id,tbl){
 
 //----------------------------------------------ACTUALIZAR
 function update(tbl,id){
-  alert(id);
+  var base=  firebase.database().ref(tbl+"/"+id);
+
+  switch(tbl){
+    case "Usuarios":{
+      var obj = new Object;
+      obj["Nombre"]= obtener("nombre1");
+      obj["pass"]=obtener("pass1");
+      obj["tipo"]=obtener("tipo1");
+      obj["Estado"]=0;
+      break;
+    }
+    case "Vendedores":{
+      break;
+    }
+    case "Productos":{
+      break;
+    }
+    case "Clientes":{
+      break;
+    }
+    case "Proveedores":{
+      break;
+    }
+    case "Ventas":{
+      break;
+    }
+  }
+  //alert(id);
+  base.set(obj);
+  nowuiDashboard.showNotification('top','center',"<b>REGISTRO Actualizado!</b>","info");
+  setTimeout(function(){location.reload()},3000);
+
 }
 function modaledit(tbl,id){
+/*
+  var usuarios = ['text','text','text','hidden'];
+  var vendedores = ["text","text","text","text","text"];
+  var productos =["text","text","number","number"];
+  var proveedores=["text","text","number"];
+  var ventas = ["date","text","text","text","text","number","number"]  ;
+  var clientes= ["text","text","number","text","text"];
+*/
   var modal = 
  " <div class='modal fade' id='Edt"+id+"' tabindex='-1' role='dialog' aria-labelledby='Edt"+id+"Label' aria-hidden='true'>"+
  " <div class='modal-dialog' role='document'>"+
@@ -119,8 +158,45 @@ function modaledit(tbl,id){
 "          <span aria-hidden='true'>&times;</span>"+
 "        </button>"+
 "      </div>"+
-"      <div class='modal-body'>"+
-        "        ..."+
+"      <div class='modal-body'>";
+var data= "";
+switch(tbl){
+  case "Usuarios":{
+      data="<form>"+
+     " <div class='row'>"+
+       " <div class='col'>"+
+          "<input id='nombre1' type='text' class='form-control' placeholder='Nombre'>"+
+       " </div>"+
+       " <div class='col'>"+
+          "<input id='pass1' type='password' class='form-control' placeholder='Contraseña'>"+
+        "</div>"+
+      "</div><div class='row'><div class='col'>"+
+      "<select style='width:auto;margin-left:40%;' id='tipo1' class='form-control' placeholder='Tipo'>"+
+     " <option value='Admin'>Admin</option>"+
+      "<option selected value='Limitado'>Limitado</option>"+
+    "</select></div></div>"+
+    "</form>";
+    break;
+  }
+  case "Vendedores":{
+    break;
+  }
+  case "Productos":{
+    break;
+  }
+  case "Clientes":{
+    break;
+  }
+  case "Proveedores":{
+    break;
+  }
+  case "Ventas":{
+    break;
+  }
+}
+modal+=data;
+modal+=
+        "        <br>"+
 "      </div>"+
 "      <div class='modal-footer'>"+
 "        <button type='button' class='btn btn-secondary' data-dismiss='modal'>Cerrar</button>"+
