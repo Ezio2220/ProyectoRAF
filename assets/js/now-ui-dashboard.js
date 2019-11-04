@@ -140,12 +140,12 @@ nowuiDashboard = {
     navbar_menu_visible: 0
   },
 
-  showNotification: function(from, align) {
-    color = 'primary';
+  showNotification: function(from, align,text,cl) {//agrege el atributo texto para modificar el texto de las notificaciones
+    color = cl;       //agrege el color para tambien elegirlo
 
     $.notify({
       icon: "now-ui-icons ui-1_bell-53",
-      message: "Welcome to <b>Now Ui Dashboard</b> - a beautiful freebie for every web developer."
+      message: text
 
     }, {
       type: color,

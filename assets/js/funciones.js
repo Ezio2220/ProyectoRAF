@@ -16,7 +16,6 @@ function obtener(id){
 }
 //----------------------------funcion para agregar usuarios----------------------------
 function insertardatos(){
-
     var nombre = obtener("nombre");
     var contraseña = obtener("pass");//se obtienen los datos del formulariio
     var tipo = obtener("tipo");
@@ -58,7 +57,6 @@ function insertardatos(){
             //si son iguales osea si ya hay un nombre igual al de elemento que pondremos 
             alert("ESE USUARIO YA EXISTE!");//entonces se pondra una alerta 
             return 0;//y se detendra la funcion
-            
           }
       }
       //todo aqui abajo es para agregar una cantidad de 0 antes del n (representa el numero de usuario limitado o admin que sera el que se acaba de registrar)
@@ -78,19 +76,17 @@ function insertardatos(){
       bd.child(id).set(obj);//se duce que en la instancia de la base de datos actual (vease linea N°34)
       //.child() crea un subdato que este sera el id que ya creamos y dentro de el se pondra (.set) el objeto que cotiene los datos del usuario
 
-      alert("Registrado");//se indica que se registro 
-      location.reload(true);//recargamos la pagina
+     /* alert("Registrado");//se indica que se registro 
+      location.reload(true);//recargamos la pagina*/
+      nowuiDashboard.showNotification('top','center',"<b>REGISTRO EXITOSO!</b>","success");
+      setTimeout(function(){location.reload()},3000);
       });
      // var bd = firebase.database().ref("Usuarios/"+id);
      // bd.set(obj);
     }
 }
-function filltabla(id,nombre,contraseña,tipo){ //funcion para agregar filas de tabla mas rapido a usuarios
-  return "<tr>"+ "<td>"+id+"</td>"+"<td>"+nombre+"</td>"+
-  "<td>"+contraseña+"</td>" + "<td>"+tipo+"</td>" + "<td></td></tr>";
-
-}
-function filltablav2(arreglo,tp,id){
+//-----------------------------------------------------------------------------------dibujar tabla
+function filltablav2(arreglo,tp,id,tbl){
   var tbody;
   tbody="<tr>";
   for(var i=0;i<arreglo.length;i++){
@@ -98,21 +94,59 @@ function filltablav2(arreglo,tp,id){
   }
   if(tp){
     tbody+="<td class='td-actions text-right'>"+
-    "<button id='U"+id+"' onclick='prueba(this.id);'  type='button' rel='tooltip' class='btn btn-success btn-sm btn-icon'>"+
+    "<button id='"+id+"' data-toggle='modal' data-target='#Edt"+id+"' onclick=\"modaledit('"+tbl+"',this.id);\"  type='button' rel='tooltip' class='btn btn-success btn-sm btn-icon'>"+
         "<i class='now-ui-icons ui-2_settings-90'></i> </button>"+
-    "<button id='D"+id+"' onclick='prueba(this.id);' type='button' rel='tooltip' class='btn btn-danger btn-sm btn-icon'>"+
+    "<button id='"+id+"' onclick=\"borrar('"+tbl+"',this.id);\" type='button' rel='tooltip' class='btn btn-danger btn-sm btn-icon'>"+
     "<i class='now-ui-icons ui-1_simple-remove'></i> </button>"+"</td>";
   }
   tbody+="</tr>";
-
   return tbody;
 }
-function prueba(id){
+//-----------------------------------------------------------------------acciones de botones
+
+//----------------------------------------------ACTUALIZAR
+function update(tbl,id){
   alert(id);
 }
+function modaledit(tbl,id){
+  var modal = 
+ " <div class='modal fade' id='Edt"+id+"' tabindex='-1' role='dialog' aria-labelledby='Edt"+id+"Label' aria-hidden='true'>"+
+ " <div class='modal-dialog' role='document'>"+
+"    <div class='modal-content'>"+
+"      <div class='modal-header'>"+
+"        <h5 class='modal-title' id='Edt"+id+"Label'>Editar</h5>"+
+"        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>"+
+"          <span aria-hidden='true'>&times;</span>"+
+"        </button>"+
+"      </div>"+
+"      <div class='modal-body'>"+
+        "        ..."+
+"      </div>"+
+"      <div class='modal-footer'>"+
+"        <button type='button' class='btn btn-secondary' data-dismiss='modal'>Cerrar</button>"+
+"        <button type='button' id='"+id+"' onclick=\"update('"+tbl+"',this.id);\" class='btn btn-primary'>Actualizar Datos</button>"+
+"      </div>"+
+"    </div>"+
+"  </div>"+
+"</div>";
+console.log(modal);
+fillparte("editar",modal);
+
+
+}
+//------------------------------------------------ELIMINAR
+function borrar(tbl,id){
+  var base = firebase.database().ref(tbl+"/"+id);
+ var mensaje = "elemento con el id: <b> "+id+" </b> ha sido <b>ELIMINADO</b>"; 
+ base.remove();
+  nowuiDashboard.showNotification('top','center',mensaje,"danger");
+  setTimeout(function(){location.reload()},3000);
+}
+//---------------------------------------------insertar en el html
 function fillparte(id,datos){ //funcion para rellenar partes de un html atravez de su id
   document.getElementById(id).innerHTML += datos; //.innerhtml inserta datos con codigo html directamente
 }
+//---------------------------------------------consultar usuarios
 function consultar(){   ///funcion para consultar datos
   var db = firebase.database().ref("Usuarios"); //se crea instancia de la base datos centrandonos en usuarios
   db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
@@ -125,12 +159,41 @@ function consultar(){   ///funcion para consultar datos
       console.log(tmp);
      /*  tabla+= filltabla(documento,aux[documento].Nombre, //a la variable tabla se agregara cada vez el id (Documento) seguido de sus demas elementos de cada id (usuario) existente en Usuarios
         aux[documento].pass,aux[documento].tipo);*/
-        tabla += filltablav2(tmp,1,documento);
+        tabla += filltablav2(tmp,1,documento,"Usuarios");
     }
     fillparte("datos",tabla);//finalmente se inserta en el html con la funcion creada
-    
   });
 }
-function consultarglobal(tbl){
-alert("en proceso");
+//---------------------------------------------------consultar de cualquier tabla menos usuarios.
+function consultarglobal(tbl,id){
+//tbl el nombre de la tabla que se tomara, id 1 si quiere mostrar el id en la consulta 0 si no quiere mostrarlo en la consulta.
+var db = firebase.database().ref(tbl); //se crea instancia de la base datos centrandonos en usuarios
+db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
+  var aux = snap.val(); //se crea un auxiliar que tomara los datos de ese snap
+  var tabla = "";   //se crea la variable donde se guardara la tabla entera
+  var tmp,tmpax;
+  for(var documento in aux){  //se hace un for por cada id dentro de usuarios osea por cada usuario
+    tmp =Object.values(aux[documento]); 
+    tmpax = tmp;
+    if(id){
+      tmpax.push(documento);
+    }
+    for(var i=0;i<tmpax.length;i++){//para reordenar las cosas
+     if(id){
+       if(i==0){
+         tmp[0]=documento;
+       }else{
+         tmp[i]=tmpax[i-1];
+       }
+     }else{
+       tmp[i]=tmpax[i];
+     }
+    }
+    console.log(tmp);
+   /*  tabla+= filltabla(documento,aux[documento].Nombre, //a la variable tabla se agregara cada vez el id (Documento) seguido de sus demas elementos de cada id (usuario) existente en Usuarios
+      aux[documento].pass,aux[documento].tipo);*/
+      tabla += filltablav2(tmp,1,documento,tbl);
+  }
+  fillparte("datos",tabla);//finalmente se inserta en el html con la funcion creada
+});
 }
