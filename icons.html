@@ -20,7 +20,7 @@
   <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 
-<body onload="consultarglobal('Clientes',0,1);" class="">
+<body onload="consultarglobal('Clientes',0,1);" class=""> <!-- ACA HAY la funcion en onload que es para que la tabla consulte de un solo al cargar la pagina.-->
   <div class="wrapper ">
     <div class="sidebar" data-color="orange">
       <!--
@@ -170,7 +170,7 @@
                     <div class="col-md-3 px-1">
                       <div class="form-group">
                         <label>Nombre</label>
-                        <input id="nombre"  type="text" class="form-control" placeholder="Ronal Aleman" value="">
+                        <input id="nombre"  type="text" class="form-control" placeholder="Ronal Aleman" value=""><!-- CADA INPUT debe tener un id que haga referencia al nombre de dato, este nombre de id debe ser igual del que tendra el dato en la bd-->
                       </div>
                     </div>
                     <div class="col-md-4 pl-1">
@@ -213,8 +213,9 @@
                 <img src="./assets/img/bg5.jpg" alt="...">
               </div>
               <div class="card-body">
+                <!--aca va LO DEL BOTON INSETAR LA FUNCION INSERTAR GLOBAL ES DE MAS DECIRTE QUE LO PRIMERO ES EL NOMBRE DE LA TABLA DE LA BASE DE DATOS Y LO DEMAS ES UN ARREGLO DEL NOMBRE DE LOS DATOS QUE TRAE DENTRO-->
                 <input style="width:100%;" onclick="insertarglobal('Clientes',['DUI','NIT','direccion','nombre','telefono']);" class="btn btn-success" type="button" value="AGREGAR">
-                <input style="width:100%;" class="btn btn-warning" type="button" value="CONSULTAR">
+                <input style="width:100%;" onclick="mostrar('tablezone');" class="btn btn-warning" type="button" value="CONSULTAR"><!-- LA FUNCION PARA ABRIR LOS DATOS CONSULTADOS-->
                 <!--
                 <div class="author">
                   <a href="#">
@@ -250,7 +251,7 @@
           </div>
         </div>
         <!-- ACA VIENE LA TABLA DONDE SE MOSTRARAN LOS DATOS (se puede dejar el row con style="Display:none" para que no aparezca y al darle a mostrar que aparezca.)  -->
-        <div id="tablezone" class="row">
+        <div id="tablezone" style="display:none;" class="row"><!-- EL ID PARA LA TABLA PARA QUE PUEDA ABRIRSE DESPUES ADEMAS DE LA PROPIEDAD display none PARA QUE ESTE OCULTA-->
             <div class="card">
                 <div class="card-header">
                     <h5 class="title">Consulta de Clientes</h5>
@@ -260,31 +261,16 @@
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>
-                                <th>DUi</th>
-                                <th>NIT</th>
-                                <th>Direccion</th>
+                                <th class="text-center">DUi</th>
+                                <th class="text-center">NIT</th>
+                                <th class="text-center">Direccion</th>
                                 <th class="text-center">Nombre</th>
                                 <th class="text-center">Telefono</th>
                                 <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody id="datos">
-                          <!--  <tr>
-                                <td class="text-center">1</td>
-                                <td>Andrew Mike</td>
-                                <td>Develop</td>
-                                <td>2013</td>
-                                <td>.....</td>
-                                <td class="text-right">&euro; 99,225</td>
-                                <td class="td-actions text-right">
-                                    <button type="button" rel="tooltip" class="btn btn-success btn-sm btn-icon">
-                                        <i class="now-ui-icons ui-2_settings-90"></i>
-                                    </button>
-                                    <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-icon">
-                                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                                    </button>
-                                </td>
-                            </tr>-->
+                        <tbody id="datos"><!-- SE DEJAN POR DEFAULT EL TBODY VACIO Y ADEMAS SE LE PONE EL ID DATOS PARA QUE ASI SE AÑADAN DATOS A EL-->
+                        
                         </tbody>
                     </table>
                 </div>
@@ -293,7 +279,7 @@
           </div>
         </div>
       </div>
-      <div id="editar">
+      <div id="editar"><!-- ACA VA ESTE DIV SIEMPRE ANTES DEL FOOTER Y ES DONDE SE ALMACENA EL MODAL TEMPORAL CUANDO SE DA EDITAR -->
 
       </div>
       <footer class="footer">
@@ -311,7 +297,7 @@
       </footer>
     </div>
   </div>
-  
+  <!-- Y COMO SIEMPRE LAS IMPORTACIONES DE LOS JS NECESARIOS.-->
    <!--   necesarios para trabajar con la base de datos   -->
    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase.js"></script>
    <script src="assets/js/funciones.js"></script> 
