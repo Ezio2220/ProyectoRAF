@@ -7,7 +7,7 @@
   <link rel="icon" type="image/vnd.microsoft.icon" href="assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Mapa
+    Productos
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -37,7 +37,7 @@
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
           <li>
-            <a href="./dashboard.html">
+            <a href="./index.html">
               <i class="now-ui-icons design_app"></i>
               <p>Dashboard</p>
             </a>
@@ -45,13 +45,13 @@
           <li>
             <a href="./icons.html">
               <i class="now-ui-icons education_atom"></i>
-              <p>Icons</p>
+              <p>Clientes</p>
             </a>
           </li>
           <li class="active ">
             <a href="./map.html">
               <i class="now-ui-icons location_map-big"></i>
-              <p>Maps</p>
+              <p>Productos</p>
             </a>
           </li>
           <li>
@@ -63,25 +63,25 @@
           <li>
             <a href="./user.html">
               <i class="now-ui-icons users_single-02"></i>
-              <p>User Profile</p>
+              <p>Usuarios</p>
             </a>
           </li>
           <li>
             <a href="./tables.html">
               <i class="now-ui-icons design_bullet-list-67"></i>
-              <p>Table List</p>
+              <p>Ventas</p>
             </a>
           </li>
           <li>
             <a href="./typography.html">
               <i class="now-ui-icons text_caps-small"></i>
-              <p>Typography</p>
+              <p>Vendedores</p>
             </a>
           </li>
           <li class="active-pro">
             <a href="./upgrade.html">
               <i class="now-ui-icons arrows-1_cloud-download-93"></i>
-              <p>Upgrade to PRO</p>
+              <p>Proveedores</p>
             </a>
           </li>
         </ul>
@@ -99,7 +99,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Maps</a>
+            <a class="navbar-brand" href="#pablo">Productos</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -156,46 +156,131 @@
       </div>
       <div class="content">
         <div class="row">
-          <div class="col-md-12">
-            <div class="card ">
-              <div class="card-header ">
-                Google Maps
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="title">Productos</h5>
               </div>
-              <div class="card-body ">
-                <div id="map" class="map"></div>
+              <div class="card-body">
+                <form>
+                  <div class="row">
+                    <div class="col-md-3 px-1">
+                      <div class="form-group">
+                        <label>Nombre De Producto</label>
+                        <input type="text" class="form-control" placeholder="Impresora" value="">
+                      </div>
+                    </div>
+                    <div class="col-md-4 pl-1">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Marca</label>
+                        <input type="email" class="form-control" placeholder="Cannon">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 pr-1">
+                      <div class="form-group">
+                        <label>Cantidad</label>
+                        <input type="text" class="form-control" placeholder="10" value="">
+                      </div>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
+          <div class="col-md-4">
+            <!--    ---------------------------------------ACA IRIAN LAS ACCIONES!-->
+            <div class="card card-user">
+              <div class="image">
+                <img src="./assets/img/bg5.jpg" alt="...">
+              </div>
+              <div class="card-body">
+                <input style="width:100%;" class="btn btn-success" type="button" value="AGREGAR">
+                <input style="width:100%;" class="btn btn-warning" type="button" value="CONSULTAR">
+                <!--
+                <div class="author">
+                  <a href="#">
+                    <img class="avatar border-gray" src="../assets/img/mike.jpg" alt="...">
+                    <h5 class="title">Mike Andrew</h5>
+                  </a>
+                  <p class="description">
+                    michael24
+                  </p>
+                </div>
+                <p class="description text-center">
+                  "Lamborghini Mercy
+                  <br> Your chick she so thirsty
+                  <br> I'm in that two seat Lambo"
+                </p>-->
+              </div>
+              <hr>
+              <!--
+              <div class="button-container">
+                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                  <i class="fab fa-facebook-f"></i>
+                </button>
+                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                  <i class="fab fa-twitter"></i>
+                </button>
+                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                  <i class="fab fa-google-plus-g"></i>
+                </button>
+              </div>
+            -->
+            </div>
+            <!-- Y ACA TERMINARIAN ------------------------>
+          </div>
         </div>
+        <!-- ACA VIENE LA TABLA DONDE SE MOSTRARAN LOS DATOS (se puede dejar el row con style="Display:none" para que no aparezca y al darle a mostrar que aparezca.)  -->
+        <div id="tablezone" class="row">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">Consulta de Productos</h5>
+                  </div>
+                <div class="card-body" id="datatable">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">#</th>
+                                <th>Nombre De Producto</th>
+                                <th>Marca</th>
+                                <th>Cantidad</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td>Andrew Mike</td>
+                                <td>Develop</td>
+                                <td>2013</td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" class="btn btn-success btn-sm btn-icon">
+                                        <i class="now-ui-icons ui-2_settings-90"></i>
+                                    </button>
+                                    <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-icon">
+                                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+        </div>
+        <!--FIN DE LA TABLA DE DATOS-->
       </div>
       <footer class="footer">
         <div class="container-fluid">
           <nav>
-            <ul>
-              <li>
-                <a href="https://www.creative-tim.com">
-                  Creative Tim
-                </a>
-              </li>
-              <li>
-                <a href="http://presentation.creative-tim.com">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="http://blog.creative-tim.com">
-                  Blog
-                </a>
-              </li>
-            </ul>
           </nav>
           <div class="copyright" id="copyright">
             &copy;
             <script>
               document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
             </script>, Designed by
-            <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
+            <a href="" target="_blank">FRAFS</a>.
           </div>
         </div>
       </footer>
