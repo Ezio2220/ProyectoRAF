@@ -41,7 +41,7 @@ else if(n>=10){
 else{
   id+="00000"+n;
 }
-bd.child(id).set(obj);
+base.child(id).set(obj);
 nowuiDashboard.showNotification('top','center',"<b>REGISTRO EXITOSO!</b>","success");
 setTimeout(function(){location.reload()},3000);
 });
@@ -120,14 +120,17 @@ function insertardatos(n1,n2,n3){
     }
 }
 //-----------------------------------------------------------------------------------dibujar tabla
-function filltablav2(arreglo,tp,id,tbl){
+function filltablav2(arreglo,tp,id,tbl,n = 0){
   var tbody;
   tbody="<tr>";
+  if(n>0){
+    tbody+="<td>"+n+"</td>";
+  }
   for(var i=0;i<arreglo.length;i++){
-    tbody+="<td>"+arreglo[i]+"</td>";
+    tbody+="<td class='text-center'>"+arreglo[i]+"</td>";
   }
   if(tp){
-    tbody+="<td class='td-actions text-right'>"+
+    tbody+="<td class='td-actions text-center'>"+
     "<button id='"+id+"' data-toggle='modal' data-target='#Edt"+id+"' onclick=\"modaledit('"+tbl+"',this.id);\"  type='button' rel='tooltip' class='btn btn-success btn-sm btn-icon'>"+
         "<i class='now-ui-icons ui-2_settings-90'></i> </button>"+
     "<button id='"+id+"' onclick=\"borrar('"+tbl+"',this.id);\" type='button' rel='tooltip' class='btn btn-danger btn-sm btn-icon'>"+
@@ -158,6 +161,12 @@ function update(tbl,id){
       break;
     }
     case "Clientes":{
+      var obj = new Object;
+      obj["DUI"]=obtener("DUI1");
+      obj["NIT"]=obtener("NIT1");
+      obj["direccion"]=obtener("direccion1");
+      obj["nombre"]=obtener("nombre1");
+      obj["telefono"]=obtener("telefono1");
       break;
     }
     case "Proveedores":{
@@ -219,6 +228,44 @@ switch(tbl){
     break;
   }
   case "Clientes":{
+    data="                <form>"+
+                  "<div class='row'>"+
+                    "<div class='col-md-3 px-1'>"+
+                      "<div class='form-group'>"+
+                       " <label>Nombre</label>"+
+                        "<input id='nombre1'  type='text' class='form-control' placeholder='Ronal Aleman' value=''>"+
+                      "</div>"+
+                    "</div>"+
+                    "<div class='col-md-4 pl-1'>"+
+"                      <div class='form-group'>"+
+                        "<label for='exampleInputEmail1'>Direccion</label>"+
+                        "<input id='direccion1'  type='email' class='form-control' placeholder='San Miguel'>"+
+                      "</div>"+
+                    "</div>"+
+                  "</div>"+
+                  "<div class='row'>"+
+                    "<div class='col-md-6 pr-1'>"+
+"                      <div class='form-group'>"+
+                        "<label>Telefono</label>"+
+                        "<input id='telefono1' type='number' class='form-control' placeholder='75657484' value=''>"+
+                      "</div>"+
+                    "</div>"+
+                    "<div class='col-md-6 pl-1'>"+
+"                      <div class='form-group'>"+
+                        "<label>DUI</label>"+
+                        "<input id='DUI1' type='text' class='form-control' placeholder='38789230-0' value=''>"+
+                      "</div>"+
+                    "</div>"+
+                  "</div>"+
+                  "<div class='row'>"+
+                    "<div class='col-md-12'>"+
+                      "<div class='form-group'>"+
+                        "<label>NIT</label>"+
+                        "<input id='NIT1' type='text' class='form-control' placeholder='8039-011194-101-0' value=''>"+
+                      "</div>"+
+                    "</div>"+
+                  "</div>"+
+                "</form>";
     break;
   }
   case "Proveedores":{
@@ -275,14 +322,16 @@ function consultar(){   ///funcion para consultar datos
   });
 }
 //---------------------------------------------------consultar de cualquier tabla menos usuarios.
-function consultarglobal(tbl,id){
+function consultarglobal(tbl,id,num = false){
 //tbl el nombre de la tabla que se tomara, id 1 si quiere mostrar el id en la consulta 0 si no quiere mostrarlo en la consulta.
 var db = firebase.database().ref(tbl); //se crea instancia de la base datos centrandonos en usuarios
 db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
   var aux = snap.val(); //se crea un auxiliar que tomara los datos de ese snap
   var tabla = "";   //se crea la variable donde se guardara la tabla entera
   var tmp,tmpax;
+  var cont=0;
   for(var documento in aux){  //se hace un for por cada id dentro de usuarios osea por cada usuario
+    cont++;
     tmp =Object.values(aux[documento]); 
     tmpax = tmp;
     if(id){
@@ -302,7 +351,12 @@ db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
     console.log(tmp);
    /*  tabla+= filltabla(documento,aux[documento].Nombre, //a la variable tabla se agregara cada vez el id (Documento) seguido de sus demas elementos de cada id (usuario) existente en Usuarios
       aux[documento].pass,aux[documento].tipo);*/
-      tabla += filltablav2(tmp,1,documento,tbl);
+      if(num){
+        tabla += filltablav2(tmp,1,documento,tbl,cont);
+      }else{
+         tabla += filltablav2(tmp,1,documento,tbl);
+      }
+     
   }
   fillparte("datos",tabla);//finalmente se inserta en el html con la funcion creada
 });
