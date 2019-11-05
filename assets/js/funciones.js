@@ -14,6 +14,10 @@
 function obtener(id){
   return document.getElementById(id).value;
 }
+//-------------------------------------------MOSTRAR TABLA
+function mostrar(id){
+  document.getElementById(id).style.display= "block";
+}
 //------------------------------------------------insertar  a cualquier tabla
 function insertarglobal(tbl,arreglo){
 var base = firebase.database().ref(tbl);
