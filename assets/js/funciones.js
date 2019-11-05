@@ -162,6 +162,11 @@ function update(tbl,id){
       break;
     }
     case "Productos":{
+      var obj = new Object;                   //aqui es solo de poner las cosas en el orden que estan en la bd
+      obj["cantidad"]=obtener("cantidad1");     //y luego obtenerlas del modal el modal tiene los mismos nombres
+      obj["marca"]=obtener("marca1");                 //que los campos a agregar solo que con un 1 al final
+      obj["nombre"]=obtener("nombre1");
+      obj["precio"]=obtener("precio1");
       break;
     }
     case "Clientes":{
@@ -208,7 +213,7 @@ function modaledit(tbl,id){
 "      <div class='modal-body'>";
 var data= "";
 switch(tbl){
-  case "Usuarios":{
+  case "Usuarios":{   //aca solo copias el formulario que usas para editar el mismo solo cambias los id poniendoles un 1 al final para diferenciarlos
       data="<form>"+
      " <div class='row'>"+
        " <div class='col'>"+
