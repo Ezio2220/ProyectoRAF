@@ -619,6 +619,20 @@ function comprobar(){
     nowuiDashboard.showNotification('top','center',"<b>Debe iniciar sesion!</b>","danger");
       setTimeout(function(){window.location.href = base+'login/index.html';},1000);
   }else{
+      var db = firebase.database().ref("Usuarios");
+      db.once('value',function(snap){
+        var aux = snap.val();
+        for(var data in aux){
+          if(data==clave.getItem('active')){
+            if(aux[data].Estado==0){
+              clave.removeItem('active');
+              nowuiDashboard.showNotification('top','center',"<b>Se Cerro la Sesion en otro Dispositivo!</b>","danger");
+              setTimeout(function(){location.reload()},1500);
+            }
+          }
+        }
+      });
+
       document.getElementById("todo").hidden=false;
       console.log("logeado con:"); 
       var user = clave.getItem('active');
