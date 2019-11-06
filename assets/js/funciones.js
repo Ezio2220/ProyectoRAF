@@ -523,7 +523,7 @@ db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
 
 //----------------------------------------------------------------------------SESIONES--------------------------------------
 const clave = window.localStorage;
-const base = "file:///D:/works/0/2019/TSI/ProyectoRAF/";
+const base = "https://ezio2220.github.io/ProyectoRAF/";
 
 function salir(){
   console.log(clave.getItem('active'));
