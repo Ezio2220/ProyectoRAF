@@ -20,8 +20,8 @@
   <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 <!-- conultar global lo unico que cambiaras es el nombre de la tabla de la que tomara los datos lo demas dejalo igual que aca-->
-<body onload="comprobar();consultarglobal('Clientes',0,1);" class=""> <!-- lo mismo del comprobar.-->
-  <div id="todo" hidden class="wrapper ">  <!--se le pone hidden y el id todo para que si alguien intenta entrar sin logearse lo devuelva y no le muestre nada-->
+<body onload="comprobar();consultarglobal('Clientes',0,1);" class=""> <!--#########################3 lo mismo del comprobar antes de consultar en onload.-->
+  <div id="todo" hidden class="wrapper ">  <!-- #################################se le pone hidden y el id todo para que si alguien intenta entrar sin logearse lo devuelva y no le muestre nada-->
     <div class="sidebar" data-color="orange">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
@@ -140,7 +140,7 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a onclick="salir();" class="nav-link"><!--temporal -->
+                <a onclick="salir();" class="nav-link"><!--############################3temporal -->
                   <i class="now-ui-icons users_single-02"></i>
                   <p>
                     <span  class="d-lg-none d-md-block">Cerrar sesion</span>
@@ -216,7 +216,7 @@
                 <!--aca va LO DEL BOTON INSETAR LA FUNCION INSERTAR GLOBAL ES DE MAS DECIRTE QUE LO PRIMERO ES EL NOMBRE DE LA TABLA DE LA BASE DE DATOS Y LO DEMAS ES UN ARREGLO DEL NOMBRE DE LOS DATOS QUE TRAE DENTRO-->
                 <input style="width:100%;" onclick="insertarglobal('Clientes',['DUI','NIT','direccion','nombre','telefono']);" class="btn btn-success" type="button" value="AGREGAR">
                 <input style="width:100%;" onclick="mostrar('tablezone');" class="btn btn-warning adm" type="button" value="CONSULTAR"><!-- LA FUNCION PARA ABRIR LOS DATOS CONSULTADOS-->
-                <!--
+                <!-- ########################################### en el boton mostrar se pone en class al final adm que es para que si solo es admin pueda verlo
                 <div class="author">
                   <a href="#">
                     <img class="avatar border-gray" src="../assets/img/mike.jpg" alt="...">
