@@ -10,7 +10,53 @@ var firebaseConfig = {
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+  const clave = window.localStorage;
+  const base = "file:///D:/works/0/2019/TSI/ProyectoRAF/";
+function logearse(){
+    var user = document.getElementById("nombre").value;
+    var pass = document.getElementById("pass").value;
+    var obj = new Object();
+        var cmp = 0;
+        var db = firebase.database().ref("Usuarios"); 
+        db.once("value",function(snap){ 
+          var aux = snap.val(); 
+          for(var documento in aux){  
+            if(aux[documento].Nombre == user && aux[documento].pass == pass ){
+                obj=aux[documento];
+                clave.setItem('active',documento);
+                obj["Estado"]=1;
+                cmp=1;
+            }
+          }
+          if(cmp==0){
+            console.log("usuario y/o contraseña incorrecto");
+          }else{
+              console.log(obj);
+            db.child(clave.getItem('active')).set(obj);
+               console.log("exito");
+        console.log(clave.getItem('active'));
+            
+            alert("DATOS CORRECTOS ACCEDIENDO...");
+            //setTimeout(function(){window.location.href = base+'index.html';},1000);
+          }       
+        });
+}
 
+function salir(){
+    console.log(clave.getItem('active'));
+    var db = firebase.database().ref("Usuarios/"+clave.getItem('active'));
+    var obj = new Object();
+    obj["Estado"]=0;
+    console.log(obj);
+    db.update(obj);
+
+    clave.removeItem('active');
+    console.log("eliminado");
+}
+
+
+
+/*
   function logearse(){
     const name =  document.getElementById("nombre").value;
     const pass = document.getElementById("pass").value;
@@ -57,7 +103,7 @@ firebase.auth().onAuthStateChanged(firebaseuser=>{
         console.log("no logeado");//si no esta logeado firebaseuser es null
         alert("no logeado");
     }
-   */ if(actual){
+    if(actual){
         console.log(actual);
         
         console.log("sige activo el usuario "+actual.email +" jajaj "+actual.displayName);
@@ -95,3 +141,4 @@ function raro(){
         }
     }
 }
+*/
