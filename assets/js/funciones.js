@@ -521,7 +521,7 @@ db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
 });
 }
 //---------------------------------------------------------funcion para consultar desde una lista desplegable
-function cargardatos(id,tbl,campo,multiple=0){
+function cargardatos(id,tbl,campo,multiple=0,vend=0){
 var lista = document.getElementById(id);
 console.log(lista.length);
 if(lista.length>0){
@@ -537,9 +537,45 @@ var data ;
 var c;
 var camp;
 var db = firebase.database().ref(tbl); 
+
 db.once("value",function(snap){ 
   var aux = snap.val(); 
+  if(vend){//esto lo puse en vendedor para que no deje darle un usuario que ya tenga otro vendedor.
+    var db2 = firebase.database().ref("Vendedores");
+      var rep = 0;
+      db2.once('value',function(snapito){
+        var ax = snapito.val();
+        
+        for(var j in aux){
+          rep=0;
+          for(var dc in ax){
+          
+          console.log("comparando");
+          console.log(ax[dc].usuario+" "+j)
+          if(ax[dc].usuario==j){
+            console.log("estan iguales");
+            rep=1;
+          }
+          }
+          if(rep==0){
+          console.log("se salvo");
+          data= document.createElement("option");  
+          c = aux[j];
+          camp = c[campo];
+          data.text=camp;
+          data.value=documento;
+          lista.add(data);
+          console.log(camp);
+        }
+
+        }
+        
+        
+        
+      });
+  }else{
   for(var documento in aux){
+    
     data= document.createElement("option");  
     c = aux[documento];
     camp = c[campo];
@@ -547,7 +583,9 @@ db.once("value",function(snap){
     data.value=documento;
     lista.add(data);
     console.log(camp);
+    
   }
+}
   });
 }
 
@@ -555,7 +593,7 @@ db.once("value",function(snap){
 //----------------------------------------------------------------------------SESIONES--------------------------------------
 const clave = window.localStorage;
 //"D:/works/0/2019/TSI/ProyectoRAF/";
-const base = "https://ezio2220.github.io/ProyectoRAF/";
+const base = "D:/works/0/2019/TSI/ProyectoRAF/";//"https://ezio2220.github.io/ProyectoRAF/";
 
 function salir(){
   console.log(clave.getItem('active'));
