@@ -159,6 +159,12 @@ function update(tbl,id){
       break;
     }
     case "Vendedores":{
+      var obj = new Object;
+      obj["DUI"]=obtener("DUI1");
+      obj["NIT"]=obtener("NIT1");
+      obj["direccion"]=obtener("direccion1");
+      obj["nombre"]=obtener("nombre1");
+      obj["usuario"]=obtener("usuario1");
       break;
     }
     case "Productos":{
@@ -179,9 +185,21 @@ function update(tbl,id){
       break;
     }
     case "Proveedores":{
+      var obj = new Object;
+      obj["detalle"]=obtener("detalle1");
+      obj["nombre"]=obtener("nombre1");
+      obj["telefono"]=obtener("telefono1");
       break;
     }
     case "Ventas":{
+      var onj = new Object;
+      obj["cliente"]=obtener("cliente1");
+      obj["detalle"]=obtener("detalle1");
+      obj["fecha"]=obtener("fecha1");
+      obj["subtotal"]=obtener("subtotal1");
+      obj["tipopago"]=obtener("tipopago1");
+      obj["total"]=obtener("total1");
+      obj["vendedor"]=obtener("vendedor1");
       break;
     }
   }
@@ -231,9 +249,77 @@ switch(tbl){
     break;
   }
   case "Vendedores":{
+    data= "<form>"+
+                "<div class='row'>"+
+                    "<div class='col-md-3 px-1'>"+
+                      "<div class='form-group'>"+
+                        "<label>Nombre</label>"+
+                        "<input id='nombre1' type='text' class='form-control' placeholder='Ronal Aleman' value=''>"+
+                      "</div>"+
+                    "</div>"+
+                    "<div class='col-md-4 pl-1'>"+
+                      "<div class='form-group'>"+
+                        "<label for='exampleInputEmail1'>Direccion</label>"+
+                        "<input id='direccion1' type='email' class='form-control' placeholder='San Miguel'>"+
+                      "</div>"+
+                    "</div>"+
+                  "</div>"+
+                  "<div class='row'>"+
+                    "<div class='col-md-6 pl-1'>"+
+                      "<div class='form-group'>"+
+                        "<label>DUI</label>"+
+                        "<input id='DUI1' type='text' class='form-control' placeholder='38789230-0' value=''>"+
+                      "</div>"+
+                    "</div>"+
+                  "</div>"+
+                  "<div class='row'>"+
+                    "<div class='col-md-12'>"+
+                      "<div class='form-group'>"+
+                        "<label>NIT</label>"+
+                        "<input id='NIT1' type='text' class='form-control' placeholder='8039-011194-101-0' value=''>"+
+                      "</div>"+
+                    "</div>"+
+                    "<div class='col-md-6 pr-1'>"+
+                      "<div class='form-group'>"+
+                        "<label>Usuarios</label>"+
+                        "<input id='usuario1' type='text' class='form-control' placeholder='User' value=''>"+
+                      "</div>"+
+                    "</div>"+
+                  "</div>"+
+                "</form>";
     break;
   }
   case "Productos":{
+    data= "<form>"+
+                  "<div class='row'>"+
+                  "<div class='col-md-3 px-1'>"+
+                      "<div class='form-group'>"+
+                        "<label>Nombre De Producto</label>"+
+                        "<input id='nombre1' type='text' class='form-control' placeholder='Impresora' value=''>"+
+                      "</div>"+
+                    "</div>"+
+                    "<div class='col-md-4 pl-1'>"+
+                      "<div class='form-group'>"+
+                        "<label for='exampleInputEmail1'>Marca</label>"+
+                        "<input id='marca1' type='email' class='form-control' placeholder='Cannon'>"+
+                      "</div>"+
+                    "</div>"+
+                  "</div>"+
+                  "<div class='row'>"+
+                    "<div class='col-md-6 pr-1'>"+
+                      "<div class='form-group'>"+
+                        "<label>Cantidad</label>"+
+                        "<input id='cantidad1' type='text' class='form-control' placeholder='10' value=''>"+
+                      "</div>"+
+                    "</div>"+
+                    "<div class='col-md-6 pr-1'>"+
+                      "<div class='form-group'>"+
+                        "<label>Precio</label>"+
+                        "<input id='precio1' type='text' class='form-control' placeholder='$10' value=''>"+
+                      "</div>"+
+                    "</div>"+
+                  "</div>"+
+                "</form>";
     break;
   }
   case "Clientes":{
@@ -278,9 +364,73 @@ switch(tbl){
     break;
   }
   case "Proveedores":{
+                "<form>"+
+                  "<div class='row'>"+
+                    "<div class='col-md-3 px-1'>"+
+                      "<div class='form-group'>"+
+                        "<label>Nombre</label>"+
+                        "<input id='nombre1' type='text' class='form-control' placeholder='Impresora' value=''>"+
+                      "</div>"+
+                    "</div>"+
+                    "<div class='col-md-4 pl-1'>"+
+                      "<div class='form-group'>"+
+                        "<label for='exampleInputEmail1'>Detalles</label>"+
+                        "<input id='detalle1' type='email' class='form-control' placeholder='Cannon'>"+
+                      "</div>"+
+                      "<div class='form-group'>"+
+                        "<label for='exampleInputEmail1'>Telefono</label>"+
+                        "<input id='telefono1' type='email' class='form-control' placeholder='78748400'>"+
+                      "</div>"+
+                    "</div>"+
+                  "</div>"+
+                "</form>";
     break;
   }
   case "Ventas":{
+                "<form>"+
+                  "<div class='row'>"+
+                    "<div class='col-md-4 pl-1'>"+
+                      "<div class='form-group'>"+
+                        "<label for='exampleInputEmail1'>Fecha</label>"+
+                        "<input id='fecha1' type='email' class='form-control' placeholder='3 Nov 2019'>"+
+                      "</div>"+
+                    "</div>"+
+                  "</div>"+
+                  "<div class='row'>"+
+                    "<div class='col-md-6 pr-1'>"+
+                      "<div class='form-group'>"+
+                        "<label>Detalle</label>"+
+                        "<input id='detalle1' type='text' class='form-control' placeholder='Detalles' value=''>"+
+                      "</div>"+
+                    "</div>"+
+                    "<div class='col-md-6 pl-1'>"+
+                      "<div class='form-group'>"+
+                        "<label>Subtotal</label>"+
+                        "<input id='subtotal1' type='text' class='form-control' placeholder='$' value=''>"+
+                      "</div>"+
+                    "</div>"+
+                  "</div>"+
+                  "<div class='row'>"+
+                    "<div class='col-md-12'>"+
+                      "<div class='form-group'>"+
+                        "<label>Total</label>"+
+                        "<input id='total1' type='text' class='form-control' placeholder='$' value=''>"+
+                      "</div>"+
+                      "<div class='form-group'>"+
+                        "<label>Tipo De Pago</label>"+
+                        "<input id='tipopago1' type='text' class='form-control' placeholder='Efectivo' value=''>"+
+                      "</div>"+
+                    "</div>"+
+                  "</div>"+
+                  "<div class='form-group'>"+
+                      "<label>Cliente</label>"+
+                      "<input id='cliente1' type='text' class='form-control' placeholder='Franklin Fuentes' value=''>"+
+                  "</div>"+
+                  "<div class='form-group'>"+
+                      "<label>Vendedor</label>"+
+                      "<input id='vendedor1' type='text' class='form-control' placeholder='Juan Lopez' value=''>"+
+                  "</div>"+
+                "</form>";
     break;
   }
 }
