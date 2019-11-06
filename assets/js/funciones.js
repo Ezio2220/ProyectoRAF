@@ -523,20 +523,38 @@ db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
 //---------------------------------------------------------funcion para consultar desde una lista desplegable
 function cargardatos(id,tbl,campo,multiple=0){
 var lista = document.getElementById(id);
+console.log(lista.length);
+if(lista.length>0){
+ /* for(var i=lista.length;i>0;i--){
+  lista.remove(i-1);
+  }*/
+console.log("ya se cargaron");
+}else{
+  if(multiple){
+    lista.multiple= true;
+  }
+var data ;
+var c;
+var camp;
 var db = firebase.database().ref(tbl); 
 db.once("value",function(snap){ 
   var aux = snap.val(); 
-  for(var documento in aux){  
-    var c = aux[documento];
-    var camp = c[campo];
+  for(var documento in aux){
+    data= document.createElement("option");  
+    c = aux[documento];
+    camp = c[campo];
+    data.text=camp;
+    data.value=documento;
+    lista.add(data);
     console.log(camp);
   }
-  
-});
+  });
+}
 
 }
 //----------------------------------------------------------------------------SESIONES--------------------------------------
 const clave = window.localStorage;
+//"D:/works/0/2019/TSI/ProyectoRAF/";
 const base = "https://ezio2220.github.io/ProyectoRAF/";
 
 function salir(){

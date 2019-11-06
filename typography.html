@@ -196,8 +196,10 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Usuarios</label>
-                        <select onclick="cargardatos(this.id,'Usuarios','Nombre',0);" class="form-control"  name="usuario" id="Usuarios">
-                          
+                        <select onmouseover="cargardatos(this.id,'Usuarios','Nombre');" class="form-control"  name="usuario" id="Usuarios">
+                        <!-- (el id del select debe ser igual al nombre del campo que se tendra en la bd) VAYA SE SUSTITUYE EL input por un select que debe estar vacio le pones un id al select, y por el metodo onmouseover le cargas la funcion donde solo cambiara la tabla("Usuarios") para el ejemplo
+                        , el nombre del campo de la bd que vera el usuario "Nombre" en este caso ya que mostramos el nombre de los usuarios en la bd, y por ultimo si queres seleccion multiple o no osea si se puede elegir masd e 1 al mismo tiempo en aso que no queras podes dejarlo vacio
+                      pero si queres que se puedan elegir varios al mismo tiempo le pones un 1-->
                         </select>
                         <!--input id="usuario" type="text" class="form-control" placeholder="User" value=""-->
                       </div>
