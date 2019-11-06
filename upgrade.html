@@ -20,7 +20,7 @@
   <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 
-<body class="">
+<body onload="consultarglobal('Proveedores',0,1);" class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="orange">
       <!--
@@ -167,13 +167,17 @@
                     <div class="col-md-3 px-1">
                       <div class="form-group">
                         <label>Nombre</label>
-                        <input type="text" class="form-control" placeholder="Impresora" value="">
+                        <input id="nombre" type="text" class="form-control" placeholder="Impresora" value="">
                       </div>
                     </div>
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Detalles</label>
-                        <input type="email" class="form-control" placeholder="Cannon">
+                        <input id="detalle" type="email" class="form-control" placeholder="Cannon">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Telefono</label>
+                        <input id="telefono" type="email" class="form-control" placeholder="78748400">
                       </div>
                     </div>
                   </div>
@@ -188,8 +192,8 @@
                 <img src="./assets/img/bg5.jpg" alt="...">
               </div>
               <div class="card-body">
-                <input style="width:100%;" class="btn btn-success" type="button" value="AGREGAR">
-                <input style="width:100%;" class="btn btn-warning" type="button" value="CONSULTAR">
+                <input style="width:100%;" onclick="insertarglobal('Proveedores',['detalle','nombre','telefono']);" class="btn btn-success" type="button" value="AGREGAR">
+                <input style="width:100%;" onclick="mostrar('tablezone');" class="btn btn-warning" type="button" value="CONSULTAR">
                 <!--
                 <div class="author">
                   <a href="#">
@@ -225,7 +229,7 @@
           </div>
         </div>
         <!-- ACA VIENE LA TABLA DONDE SE MOSTRARAN LOS DATOS (se puede dejar el row con style="Display:none" para que no aparezca y al darle a mostrar que aparezca.)  -->
-        <div id="tablezone" class="row">
+        <div id="tablezone" style="display:none;" class="row">
             <div class="card">
                 <div class="card-header">
                     <h5 class="title">Consulta de Proveedores</h5>
@@ -235,25 +239,14 @@
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>
-                                <th>Nombre</th>
                                 <th>Detalles</th>
+                                <th>Nombre</th>
+                                <th>Telefono</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-center">1</td>
-                                <td>Andrew Mike</td>
-                                <td>Develop</td>
-                                <td class="td-actions text-right">
-                                    <button type="button" rel="tooltip" class="btn btn-success btn-sm btn-icon">
-                                        <i class="now-ui-icons ui-2_settings-90"></i>
-                                    </button>
-                                    <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-icon">
-                                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                        <tbody id="datos">
+                          
                         </tbody>
                     </table>
                 </div>
