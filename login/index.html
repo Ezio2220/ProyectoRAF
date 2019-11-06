@@ -21,8 +21,8 @@
 	<link href="assets/css/demo.css" rel="stylesheet" />
 </head>
 
-<body>
-        <div class="image-container set-full-height" style="background-image: url('assets/img/wizard.jpg')">
+<body onload="comprobar();">
+        <div id="todo" hidden class="image-container set-full-height" style="background-image: url('assets/img/wizard.jpg')">
             <!--   Creative Tim Branding   -->
             <a href="http://creative-tim.com">
                  <div class="logo-container">
@@ -103,12 +103,26 @@
                 </div> <!--  big container -->
             
         
-        </div>
+        
         
 
 </body>
    <!--   necesarios para trabajar con la base de datos   -->
   <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase.js"></script>
+  <script type="text/javascript">
+    //---------------------------------CONFIGURACION DE LA BASE DE DATOS!!!
+var firebaseConfig = {
+apiKey: "AIzaSyB5ZH7s2gs3ufxvoc2cIFSjZ06DAkRN09E",
+authDomain: "proyectoraf-2ad20.firebaseapp.com",
+databaseURL: "https://proyectoraf-2ad20.firebaseio.com",
+projectId: "proyectoraf-2ad20",
+storageBucket: "proyectoraf-2ad20.appspot.com",
+messagingSenderId: "58605597964",
+appId: "1:58605597964:web:6f98febe9265a49ac88529"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+</script>
   <script src="../assets/js/sesiones.js"></script> 
 	<!--   Core JS Files   -->
 	<script src="assets/js/jquery-2.2.4.min.js" type="text/javascript"></script>
@@ -119,6 +133,7 @@
 	<script src="assets/js/gsdk-bootstrap-wizard.js"></script>
 
 	<!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
-	<script src="assets/js/jquery.validate.min.js"></script>
+    <script src="assets/js/jquery.validate.min.js"></script>
+
 
 </html>

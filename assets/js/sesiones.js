@@ -1,15 +1,4 @@
-//---------------------------------CONFIGURACION DE LA BASE DE DATOS!!!
-var firebaseConfig = {
-    apiKey: "AIzaSyB5ZH7s2gs3ufxvoc2cIFSjZ06DAkRN09E",
-    authDomain: "proyectoraf-2ad20.firebaseapp.com",
-    databaseURL: "https://proyectoraf-2ad20.firebaseio.com",
-    projectId: "proyectoraf-2ad20",
-    storageBucket: "proyectoraf-2ad20.appspot.com",
-    messagingSenderId: "58605597964",
-    appId: "1:58605597964:web:6f98febe9265a49ac88529"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+
   const clave = window.localStorage;
   const base = "file:///D:/works/0/2019/TSI/ProyectoRAF/";
 function logearse(){
@@ -36,12 +25,24 @@ function logearse(){
                console.log("exito");
         console.log(clave.getItem('active'));
             
-            alert("DATOS CORRECTOS ACCEDIENDO...");
+            //alert("DATOS CORRECTOS ACCEDIENDO...");
             setTimeout(function(){window.location.href = base+'index.html';},1000);
           }       
         });
 }
-
+function comprobar(){
+    if(clave.getItem('active')==null){
+        console.log("puede logearse");
+        document.getElementById("todo").hidden=false;
+       // alert("primero debe acceder!");
+        
+    }else{
+        console.log("YA esta logueado el usuario:");
+        console.log(clave.getItem('active'));
+        setTimeout(function(){window.location.href = base+'index.html';},1000);
+    }
+}
+/*
 function salir(){
     console.log(clave.getItem('active'));
     var db = firebase.database().ref("Usuarios/"+clave.getItem('active'));
@@ -52,11 +53,13 @@ function salir(){
 
     clave.removeItem('active');
     console.log("eliminado");
+    alert("cerrando Sesion..");
+    setTimeout(function(){window.location.href = base+'login/index.html';},1000);
 }
 
 
 
-/*
+
   function logearse(){
     const name =  document.getElementById("nombre").value;
     const pass = document.getElementById("pass").value;

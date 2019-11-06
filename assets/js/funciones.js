@@ -520,3 +520,40 @@ db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
   fillparte("datos",tabla);//finalmente se inserta en el html con la funcion creada
 });
 }
+
+//----------------------------------------------------------------------------SESIONES--------------------------------------
+const clave = window.localStorage;
+const base = "file:///D:/works/0/2019/TSI/ProyectoRAF/";
+
+function salir(){
+  console.log(clave.getItem('active'));
+  var db = firebase.database().ref("Usuarios/"+clave.getItem('active'));
+  var obj = new Object();
+  obj["Estado"]=0;
+  console.log(obj);
+  db.update(obj);
+
+  clave.removeItem('active');
+  console.log("eliminado");
+  nowuiDashboard.showNotification('top','center',"<b>Cerrando Sesion..</b>","warning");
+  setTimeout(function(){window.location.href = base+'login/index.html';},1000);
+}
+function comprobar(){
+  if(clave.getItem('active')==null){
+    nowuiDashboard.showNotification('top','center',"<b>Debe iniciar sesion!</b>","danger");
+      setTimeout(function(){window.location.href = base+'login/index.html';},1000);
+  }else{
+      document.getElementById("todo").hidden=false;
+      console.log("logeado con:"); 
+      var user = clave.getItem('active');
+      console.log(user);
+      if(user.substring(0,2)=="AD"){
+        nowuiDashboard.showNotification('top','center',"<b>Bienvenido ADMIN!</b>","success");
+       // document.getElementsByClassName("adm")
+        document.head.innerHTML= document.head.innerHTML+"<style> .adm{ display:table;} </style>"
+      }else{
+        nowuiDashboard.showNotification('top','center',"<b>Bienvenido!</b>","success");
+      }
+     
+  }
+}
