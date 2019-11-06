@@ -520,7 +520,21 @@ db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
   fillparte("datos",tabla);//finalmente se inserta en el html con la funcion creada
 });
 }
+//---------------------------------------------------------funcion para consultar desde una lista desplegable
+function cargardatos(id,tbl,campo,multiple=0){
+var lista = document.getElementById(id);
+var db = firebase.database().ref(tbl); 
+db.once("value",function(snap){ 
+  var aux = snap.val(); 
+  for(var documento in aux){  
+    var c = aux[documento];
+    var camp = c[campo];
+    console.log(camp);
+  }
+  
+});
 
+}
 //----------------------------------------------------------------------------SESIONES--------------------------------------
 const clave = window.localStorage;
 const base = "https://ezio2220.github.io/ProyectoRAF/";
