@@ -58,7 +58,8 @@ function insertardatos(n1,n2,n3){
     var contraseña = obtener(n2);//se obtienen los datos del formulariio
     var tipo = obtener(n3);
     if(nombre.length==0 || contraseña.length==0 ){
-        alert("rellene todos los campos");  //se verifica primero que todos los campos esten llenos
+         //se verifica primero que todos los campos esten llenos
+        nowuiDashboard.showNotification('top','center',"<b>rellene todos los campos!</b>","warning");
     }else{
       //alert(nombre +" "+ contraseña +" "+ tipo);
       var obj = new Object;//se cre un objeto que representara un usuario
@@ -93,7 +94,7 @@ function insertardatos(n1,n2,n3){
           //verificamos si dentro de la fotografia (aux) en el id que estamos viendo ahorita (documento) su parte del nombre es igual a la del elemento que vamos a insertar
           if(aux[documento].Nombre==obj["nombre"]){
             //si son iguales osea si ya hay un nombre igual al de elemento que pondremos 
-            alert("ESE USUARIO YA EXISTE!");//entonces se pondra una alerta 
+            nowuiDashboard.showNotification('top','center',"<b>ESE USUARIO YA EXISTE!</b>","danger");
             return 0;//y se detendra la funcion
           }
       }
@@ -124,7 +125,7 @@ function insertardatos(n1,n2,n3){
     }
 }
 //-----------------------------------------------------------------------------------dibujar tabla
-function filltablav2(arreglo,tp,id,tbl,n = 0){
+function filltablav2(arreglo,tp,id,tbl,n = 0,user=0){
   var tbody;
   tbody="<tr>";
   if(n>0){
@@ -134,11 +135,16 @@ function filltablav2(arreglo,tp,id,tbl,n = 0){
     tbody+="<td class='text-center'>"+arreglo[i]+"</td>";
   }
   if(tp){
-    tbody+="<td class='td-actions text-center'>"+
+    if(user==1 && arreglo[0] == clave.getItem('active')){
+      tbody+="<td class='td-actions text-center'><b>USUARIO ACTUAL</b></td>";
+    }else{
+      tbody+="<td class='td-actions text-center'>"+
     "<button id='"+id+"' data-toggle='modal' data-target='#Edt"+id+"' onclick=\"modaledit('"+tbl+"',this.id);\"  type='button' rel='tooltip' class='btn btn-success btn-sm btn-icon'>"+
         "<i class='now-ui-icons ui-2_settings-90'></i> </button>"+
     "<button id='"+id+"' onclick=\"borrar('"+tbl+"',this.id);\" type='button' rel='tooltip' class='btn btn-danger btn-sm btn-icon'>"+
     "<i class='now-ui-icons ui-1_simple-remove'></i> </button>"+"</td>";
+    }
+    
   }
   tbody+="</tr>";
   return tbody;
@@ -475,7 +481,7 @@ function consultar(){   ///funcion para consultar datos
       console.log(tmp);
      /*  tabla+= filltabla(documento,aux[documento].Nombre, //a la variable tabla se agregara cada vez el id (Documento) seguido de sus demas elementos de cada id (usuario) existente en Usuarios
         aux[documento].pass,aux[documento].tipo);*/
-        tabla += filltablav2(tmp,1,documento,"Usuarios");
+        tabla += filltablav2(tmp,1,documento,"Usuarios",0,1);
     }
     fillparte("datos",tabla);//finalmente se inserta en el html con la funcion creada
   });

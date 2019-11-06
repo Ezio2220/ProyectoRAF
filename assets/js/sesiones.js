@@ -20,6 +20,7 @@ function logearse(){
           }
           if(cmp==0){
             console.log("usuario y/o contraseña incorrecto");
+            alert("usuario y/o contraseña incorrecto");
           }else{
               console.log(obj);
             db.child(clave.getItem('active')).set(obj);
