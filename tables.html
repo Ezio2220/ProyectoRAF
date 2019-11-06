@@ -20,7 +20,7 @@
   <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 
-<body class="">
+<body onload="consultarglobal('Ventas',0,1);" class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="orange">
       <!--
@@ -164,17 +164,10 @@
               <div class="card-body">
                 <form>
                   <div class="row">
-                    
-                    <div class="col-md-3 px-1">
-                      <div class="form-group">
-                        <label>Numero De Factura</label>
-                        <input type="text" class="form-control" placeholder="000001" value="">
-                      </div>
-                    </div>
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Fecha</label>
-                        <input type="email" class="form-control" placeholder="3 Nov 2019">
+                        <input id="fecha" type="email" class="form-control" placeholder="3 Nov 2019">
                       </div>
                     </div>
                   </div>
@@ -182,13 +175,13 @@
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Detalle</label>
-                        <input type="text" class="form-control" placeholder="Detalles" value="">
+                        <input id="detalle" type="text" class="form-control" placeholder="Detalles" value="">
                       </div>
                     </div>
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label>Subtotal</label>
-                        <input type="text" class="form-control" placeholder="$" value="">
+                        <input id="subtotal" type="text" class="form-control" placeholder="$" value="">
                       </div>
                     </div>
                   </div>
@@ -196,17 +189,21 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Total</label>
-                        <input type="text" class="form-control" placeholder="$" value="">
+                        <input id="total" type="text" class="form-control" placeholder="$" value="">
+                      </div>
+                      <div class="form-group">
+                        <label>Tipo De Pago</label>
+                        <input id="tipopago" type="text" class="form-control" placeholder="Efectivo" value="">
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
                       <label>Cliente</label>
-                      <input type="text" class="form-control" placeholder="Franklin Fuentes" value="">
+                      <input id="cliente" type="text" class="form-control" placeholder="Franklin Fuentes" value="">
                   </div>
                   <div class="form-group">
                       <label>Vendedor</label>
-                      <input type="text" class="form-control" placeholder="Juan Lopez" value="">
+                      <input id="vendedor" type="text" class="form-control" placeholder="Juan Lopez" value="">
                   </div>
                 </form>
               </div>
@@ -219,8 +216,8 @@
                 <img src="./assets/img/bg5.jpg" alt="...">
               </div>
               <div class="card-body">
-                <input style="width:100%;" class="btn btn-success" type="button" value="AGREGAR">
-                <input style="width:100%;" class="btn btn-warning" type="button" value="CONSULTAR">
+                <input style="width:100%;" onclick="insertarglobal('Ventas',['cliente','detalle','fecha','subtotal','tipopago','total','vendedor']);" class="btn btn-success" type="button" value="AGREGAR">
+                <input style="width:100%;" onclick="mostrar('tablezone');" class="btn btn-warning" type="button" value="CONSULTAR">
                 <!--
                 <div class="author">
                   <a href="#">
@@ -256,7 +253,7 @@
           </div>
         </div>
         <!-- ACA VIENE LA TABLA DONDE SE MOSTRARAN LOS DATOS (se puede dejar el row con style="Display:none" para que no aparezca y al darle a mostrar que aparezca.)  -->
-        <div id="tablezone" class="row">
+        <div id="tablezone" style="display:none;" class="row">
             <div class="card">
                 <div class="card-header">
                     <h5 class="title">Consulta de Ventas</h5>
@@ -265,36 +262,19 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th class="text-center">#</th>
-                                <th>Numero De Facturas</th>
-                                <th>Fecha</th>
-                                <th>Detalle</th>
-                                <th>Subtotal</th>
-                                <th>Total</th>
-                                <th>Cliente</th>
-                                <th>Vendedor</th>
-                                <th>Acciones</th>
+                                <th class="text-center">N° De Factura</th>
+                                <th class="text-center">Cliente</th>
+                                <th class="text-center">Detalle</th>
+                                <th class="text-center">Fecha</th>
+                                <th class="text-center">Total</th>
+                                <th class="text-center">Tipo De Pago</th>
+                                <th class="text-center">Subtotal</th>
+                                <th class="text-center">Vendedor</th>
+                                <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-center">1</td>
-                                <td>Andrew Mike</td>
-                                <td>Develop</td>
-                                <td>2013</td>
-                                <td>total</td>
-                                <td>cliente</td>
-                                <td>vendedor</td>
-                                <td class="text-right">&euro; 99,225</td>
-                                <td class="td-actions text-right">
-                                    <button type="button" rel="tooltip" class="btn btn-success btn-sm btn-icon">
-                                        <i class="now-ui-icons ui-2_settings-90"></i>
-                                    </button>
-                                    <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-icon">
-                                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                        <tbody id="datos">
+                            
                         </tbody>
                     </table>
                 </div>
