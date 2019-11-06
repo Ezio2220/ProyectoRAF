@@ -37,7 +37,7 @@ function logearse(){
         console.log(clave.getItem('active'));
             
             alert("DATOS CORRECTOS ACCEDIENDO...");
-            //setTimeout(function(){window.location.href = base+'index.html';},1000);
+            setTimeout(function(){window.location.href = base+'index.html';},1000);
           }       
         });
 }
