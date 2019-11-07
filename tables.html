@@ -79,7 +79,7 @@
             </a>
           </li>
           <li class="active-pro">
-            <a href="./upgrade.html">
+            <a  href="javascript: salir();">
               <i class="now-ui-icons arrows-1_cloud-download-93"></i>
               <p>Salir</p>
             </a>
@@ -167,29 +167,55 @@
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Fecha</label>
-                        <input id="fecha" type="email" class="form-control" placeholder="3 Nov 2019">
+                        <input id="fecha" type="date" class="form-control" placeholder="3 Nov 2019">
                       </div>
                     </div>
+                    <div class="col">
+                          <input onclick="agregardetalle();" id="add" style="margin-left: 50%;" type="button" class="btn btn-success" value="Agregar otro producto">
+                        
+                      </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-6 pr-1">
+                    <div class="col">
                       <div class="form-group">
                         <label>Detalle</label>
-                        <input id="detalle" type="text" class="form-control" placeholder="Detalles" value="">
+                        <table id="dettable" class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Producto</th>
+                                    <th class="text-center">Cantidad</th>
+                                    <th class="text-center">Precio</th>
+                                    <th class="text-center">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody id="detdata">
+                                <tr>
+                                  <td><select onchange="selector(this.id);" aria-placeholder="seleccione los productos de la venta" class="form-control" onmouseover="cargardatos(this.id,'Productos','nombre',0,0,1);" name="detalle" id="d1">
+
+                                    </select>
+                                  </td>
+                                  <td>
+                                    <input onchange="selector(this.id);" class="form-control" value="1" id="c1" type="number" min="1">
+                                  </td>
+                                  <td>
+                                      <input class="form-control" id="p1" readonly type="number" placeholder="$" >
+                                  </td>
+                                  <td>
+                                      <input class="form-control" id="s1" readonly type="number" placeholder="$" >
+                                  </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
                       </div>
                     </div>
-                    <div class="col-md-6 pl-1">
-                      <div class="form-group">
-                        <label>Subtotal</label>
-                        <input id="subtotal" type="text" class="form-control" placeholder="$" value="">
-                      </div>
-                    </div>
+                    
                   </div>
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Total</label>
-                        <input id="total" type="text" class="form-control" placeholder="$" value="">
+                        <input id="total" readonly type="number" class="form-control" placeholder="$" value="">
                       </div>
                       <div class="form-group">
                         <label>Tipo De Pago</label>
@@ -215,39 +241,28 @@
               <div class="image">
                 <img src="./assets/img/bg5.jpg" alt="...">
               </div>
-              <div class="card-body">
+              <div class="card-body" style="min-height: max-content;">
                 <input style="width:100%;" onclick="insertarglobal('Ventas',['cliente','detalle','fecha','subtotal','tipopago','total','vendedor']);" class="btn btn-success" type="button" value="AGREGAR">
                 <input style="width:100%;" onclick="mostrar('tablezone');" class="btn btn-warning adm" type="button" value="CONSULTAR">
-                <!--
-                <div class="author">
-                  <a href="#">
-                    <img class="avatar border-gray" src="../assets/img/mike.jpg" alt="...">
-                    <h5 class="title">Mike Andrew</h5>
-                  </a>
-                  <p class="description">
-                    michael24
-                  </p>
-                </div>
-                <p class="description text-center">
-                  "Lamborghini Mercy
-                  <br> Your chick she so thirsty
-                  <br> I'm in that two seat Lambo"
-                </p>-->
+       
               </div>
               <hr>
-              <!--
+              
               <div class="button-container">
-                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                  <i class="fab fa-facebook-f"></i>
-                </button>
-                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                  <i class="fab fa-twitter"></i>
-                </button>
-                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                  <i class="fab fa-google-plus-g"></i>
-                </button>
+                <!--table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Producto</th>
+                            <th class="text-center">Cantidad</th>
+                            <th class="text-center">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detdata">
+                        
+                    </tbody>
+                </table>-->
               </div>
-            -->
+            
             </div>
             <!-- Y ACA TERMINARIAN ------------------------>
           </div>

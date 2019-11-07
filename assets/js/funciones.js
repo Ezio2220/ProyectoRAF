@@ -527,7 +527,7 @@ db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
 });
 }
 //---------------------------------------------------------funcion para consultar desde una lista desplegable
-function cargardatos(id,tbl,campo,multiple=0,vend=0){
+function cargardatos(id,tbl,campo,multiple=0,vend=0,v=0){
 var lista = document.getElementById(id);
 console.log(lista.length);
 if(lista.length>0){
@@ -587,19 +587,85 @@ db.once("value",function(snap){
     camp = c[campo];
     data.text=camp;
     data.value=documento;
+    if(v>0){
+      console.log("es una venta");
+      data.text = camp+" "+c["marca"];
+      
+      /*
+    c = aux[documento];
+    camp = c[campo];
+    data.text=camp;
+    data.value=documento;
+    lista.add(data);
+    console.log(camp);*/
+    }
     lista.add(data);
     console.log(camp);
     
+
   }
 }
   });
 }
 
 }
+//-----------------------------------------------------------------aux ventas
+function selector(id){
+var n =  parseInt(id.substring(1));
+var pro = obtener("d"+n);
+console.log(pro);
+var cant = document.getElementById("c"+n);
+var pre = document.getElementById("p"+n);
+var sub = document.getElementById("s"+n);
+var db = firebase.database().ref("Productos/"+pro);
+db.once("value",function(snap){
+    console.log("casi");
+    var ax = snap.val();
+    console.log(ax);
+    cant.max = ax["cantidad"];
+    if(id.substring(0,1)!='c'){
+      cant.value=1;
+    }else{
+      if(cant.value>cant.max){
+        cant.value=cant.max;
+      }
+    }
+    pre.value = parseFloat(ax["precio"]);
+    sub.value = parseInt(cant.value) * parseFloat(pre.value);
+    console.log("Se calculo");
+    total();
+});
+
+}
+function agregardetalle(){
+  var tabla = document.getElementById("dettable");
+  var n = tabla.rows.length;
+  var content = document.getElementById("detdata");
+  var add = "<tr>"+
+  "<td><select onchange='selector(this.id);' aria-placeholder='seleccione los productos de la venta' class='form-control' onmouseover=\"cargardatos(this.id,'Productos','nombre',0,0,1);\" name='detalle' id='d"+n+"'>"+
+"    </select>"+
+  "</td>"+
+  "<td>"+
+    "<input onchange='selector(this.id);' class='form-control' value='1' id='c"+n+"' type='number' min='1'>"+
+  "</td>"+
+  "<td><input class='form-control' id='p"+n+"' readonly type='number' placeholder='$' ></td>"+
+  "<td><input class='form-control' id='s"+n+"' readonly type='number' placeholder='$' ></td>"+
+"</tr>";
+content.innerHTML +=add;
+}
+function total(){
+  var tabla = document.getElementById("dettable");
+  var n = tabla.rows.length;
+  var suma=0;
+  for(var i=1;i<n;i++){
+    suma+= parseFloat(obtener("s"+i));
+  }
+  document.getElementById("total").value = suma;
+}
 //----------------------------------------------------------------------------SESIONES--------------------------------------
 const clave = window.localStorage;
 //"D:/works/0/2019/TSI/ProyectoRAF/";
-const base ="C:/Users/Alejandro/Documents/GitHub/ProyectoRAF/"; //"https://ezio2220.github.io/ProyectoRAF/";
+const base ="https://ezio2220.github.io/ProyectoRAF/";
 
 function salir(){
   console.log(clave.getItem('active'));
