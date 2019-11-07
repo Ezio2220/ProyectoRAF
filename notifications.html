@@ -6,9 +6,10 @@
   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
   <link rel="icon" type="image/vnd.microsoft.icon" href="assets/img/favicon.ico">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    Now UI Dashboard by Creative Tim
+  <title>
+    Proveedores
   </title>
-<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -19,8 +20,8 @@
   <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 
-<body class="">
-  <div class="wrapper ">
+<body onload="comprobar(); consultarglobal('Proveedores',0,1);" class="">
+  <div id="todo" hidden class="wrapper ">
     <div class="sidebar" data-color="orange">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
@@ -38,49 +39,49 @@
           <li>
             <a href="./index.html">
               <i class="now-ui-icons design_app"></i>
-              <p>Dashboard</p>
+              <p>Inicio</p>
             </a>
           </li>
           <li>
             <a href="./icons.html">
               <i class="now-ui-icons education_atom"></i>
-              <p>Icons</p>
+              <p>Clientes</p>
             </a>
           </li>
           <li>
             <a href="./map.html">
               <i class="now-ui-icons location_map-big"></i>
-              <p>Maps</p>
+              <p>Productos</p>
             </a>
           </li>
-          <li class="active ">
+          <li>
             <a href="./notifications.html">
               <i class="now-ui-icons ui-1_bell-53"></i>
-              <p>Notifications</p>
+              <p>Proveedores</p>
             </a>
           </li>
           <li>
             <a href="./user.html">
               <i class="now-ui-icons users_single-02"></i>
-              <p>User Profile</p>
+              <p>Usuarios</p>
             </a>
           </li>
           <li>
             <a href="./tables.html">
               <i class="now-ui-icons design_bullet-list-67"></i>
-              <p>Table List</p>
+              <p>Ventas</p>
             </a>
           </li>
           <li>
             <a href="./typography.html">
               <i class="now-ui-icons text_caps-small"></i>
-              <p>Typography</p>
+              <p>Vendedores</p>
             </a>
           </li>
-          <li class="active-pro">
+          <li class="active  active-pro " class="active-pro">
             <a href="./upgrade.html">
               <i class="now-ui-icons arrows-1_cloud-download-93"></i>
-              <p>Upgrade to PRO</p>
+              <p>Proveedores</p>
             </a>
           </li>
         </ul>
@@ -98,7 +99,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Notifications</a>
+            <a class="navbar-brand" href="#pablo">Proveedores</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -151,174 +152,116 @@
         </div>
       </nav>
       <!-- End Navbar -->
-      <div class="panel-header">
-        <div class="header text-center">
-          <h2 class="title">Notifications</h2>
-          <p class="category">Handcrafted by our friend
-            <a target="_blank" href="https://github.com/mouse0270">Robert McIntosh</a>. Please checkout the
-            <a href="http://bootstrap-notify.remabledesigns.com/" target="_blank">full documentation.</a>
-          </p>
-        </div>
+      <div class="panel-header panel-header-sm">
       </div>
       <div class="content">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-8">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title">Notifications Style</h4>
+                <h5 class="title">Proveedores</h5>
               </div>
               <div class="card-body">
-                <div class="alert alert-info">
-                  <span>This is a plain notification</span>
-                </div>
-                <div class="alert alert-info">
-                  <button type="button" aria-hidden="true" class="close">
-                    <i class="now-ui-icons ui-1_simple-remove"></i>
-                  </button>
-                  <span>This is a notification with close button.</span>
-                </div>
-                <div class="alert alert-info alert-with-icon" data-notify="container">
-                  <button type="button" aria-hidden="true" class="close">
-                    <i class="now-ui-icons ui-1_simple-remove"></i>
-                  </button>
-                  <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
-                  <span data-notify="message">This is a notification with close button and icon.</span>
-                </div>
-                <div class="alert alert-info alert-with-icon" data-notify="container">
-                  <button type="button" aria-hidden="true" class="close">
-                    <i class="now-ui-icons ui-1_simple-remove"></i>
-                  </button>
-                  <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
-                  <span data-notify="message">This is a notification with close button and icon and have many lines. You can see that the icon and the close button are always vertically aligned. This is a beautiful notification. So you don't have to worry about the style.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">Notification states</h4>
-              </div>
-              <div class="card-body">
-                <div class="alert alert-primary">
-                  <button type="button" aria-hidden="true" class="close">
-                    <i class="now-ui-icons ui-1_simple-remove"></i>
-                  </button>
-                  <span>
-                    <b> Primary - </b> This is a regular notification made with ".alert-primary"</span>
-                </div>
-                <div class="alert alert-info">
-                  <button type="button" aria-hidden="true" class="close">
-                    <i class="now-ui-icons ui-1_simple-remove"></i>
-                  </button>
-                  <span>
-                    <b> Info - </b> This is a regular notification made with ".alert-info"</span>
-                </div>
-                <div class="alert alert-success">
-                  <button type="button" aria-hidden="true" class="close">
-                    <i class="now-ui-icons ui-1_simple-remove"></i>
-                  </button>
-                  <span>
-                    <b> Success - </b> This is a regular notification made with ".alert-success"</span>
-                </div>
-                <div class="alert alert-warning">
-                  <button type="button" aria-hidden="true" class="close">
-                    <i class="now-ui-icons ui-1_simple-remove"></i>
-                  </button>
-                  <span>
-                    <b> Warning - </b> This is a regular notification made with ".alert-warning"</span>
-                </div>
-                <div class="alert alert-danger">
-                  <button type="button" aria-hidden="true" class="close">
-                    <i class="now-ui-icons ui-1_simple-remove"></i>
-                  </button>
-                  <span>
-                    <b> Danger - </b> This is a regular notification made with ".alert-danger"</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-body">
-                <div class="places-buttons">
+                <form>
                   <div class="row">
-                    <div class="col-md-6 ml-auto mr-auto text-center">
-                      <h4 class="card-title">
-                        Notifications Places
-                        <p class="category">Click to view notifications</p>
-                      </h4>
+                    <div class="col-md-3 px-1">
+                      <div class="form-group">
+                        <label>Nombre</label>
+                        <input id="nombre" type="text" class="form-control" placeholder="Impresora" value="">
+                      </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-8 ml-auto mr-auto">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <button class="btn btn-primary btn-block" onclick="nowuiDashboard.showNotification('top','left')">Top Left</button>
-                        </div>
-                        <div class="col-md-4">
-                          <button class="btn btn-primary btn-block" onclick="nowuiDashboard.showNotification('top','center')">Top Center</button>
-                        </div>
-                        <div class="col-md-4">
-                          <button class="btn btn-primary btn-block" onclick="nowuiDashboard.showNotification('top','right')">Top Right</button>
-                        </div>
+                    <div class="col-md-4 pl-1">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Detalles</label>
+                      <select onmouseover="cargardatos(this.id,'Productos','nombre',0,1);" class="form-control"  name="proveedor" id="Proveedores"></select>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Telefono</label>
+                        <input id="telefono" type="email" class="form-control" placeholder="78748400">
                       </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-lg-8 ml-auto mr-auto">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <button class="btn btn-primary btn-block" onclick="nowuiDashboard.showNotification('bottom','left')">Bottom Left</button>
-                        </div>
-                        <div class="col-md-4">
-                          <button class="btn btn-primary btn-block" onclick="nowuiDashboard.showNotification('bottom','center')">Bottom Center</button>
-                        </div>
-                        <div class="col-md-4">
-                          <button class="btn btn-primary btn-block" onclick="nowuiDashboard.showNotification('bottom','right')">Bottom Right</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                </form>
               </div>
             </div>
+          </div>
+          <div class="col-md-4">
+            <!--    ---------------------------------------ACA IRIAN LAS ACCIONES!-->
+            <div class="card card-user">
+              <div class="image">
+                <img src="./assets/img/bg5.jpg" alt="...">
+              </div>
+              <div class="card-body">
+                <input style="width:100%;" onclick="insertarglobal('Proveedores',['detalle','nombre','telefono']);" class="btn btn-success" type="button" value="AGREGAR">
+                <input style="width:100%;" onclick="mostrar('tablezone');" class="btn btn-warning adm" type="button" value="CONSULTAR">
+                <!--
+                <div class="author">
+                  <a href="#">
+                    <img class="avatar border-gray" src="../assets/img/mike.jpg" alt="...">
+                    <h5 class="title">Mike Andrew</h5>
+                  </a>
+                  <p class="description">
+                    michael24
+                  </p>
+                </div>
+                <p class="description text-center">
+                  "Lamborghini Mercy
+                  <br> Your chick she so thirsty
+                  <br> I'm in that two seat Lambo"
+                </p>-->
+              </div>
+              <hr>
+              <!--
+              <div class="button-container">
+                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                  <i class="fab fa-facebook-f"></i>
+                </button>
+                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                  <i class="fab fa-twitter"></i>
+                </button>
+                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                  <i class="fab fa-google-plus-g"></i>
+                </button>
+              </div>
+            -->
+            </div>
+            <!-- Y ACA TERMINARIAN ------------------------>
           </div>
         </div>
+        <!-- ACA VIENE LA TABLA DONDE SE MOSTRARAN LOS DATOS (se puede dejar el row con style="Display:none" para que no aparezca y al darle a mostrar que aparezca.)  -->
+        <div id="tablezone" style="display:none;" class="row">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">Consulta de Proveedores</h5>
+                  </div>
+                <div class="card-body" id="datatable">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">#</th>
+                                <th>Detalles</th>
+                                <th>Nombre</th>
+                                <th>Telefono</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="datos">
+                          
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+        </div>
+        <!--FIN DE LA TABLA DE DATOS-->
       </div>
-      <footer class="footer">
-        <div class="container-fluid">
-          <nav>
-            <ul>
-              <li>
-                <a href="https://www.creative-tim.com">
-                  Creative Tim
-                </a>
-              </li>
-              <li>
-                <a href="http://presentation.creative-tim.com">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="http://blog.creative-tim.com">
-                  Blog
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div class="copyright" id="copyright">
-            &copy;
-            <script>
-              document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
-            </script>, Designed by
-            <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
-          </div>
-        </div>
-      </footer>
     </div>
   </div>
+  <div id="editar">
+    
+  </div>
+  <!--   necesarios para trabajar con la base de datos   -->
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase.js"></script>
+  <script src="assets/js/funciones.js"></script> 
   <!--   Core JS Files   -->
   <script src="assets/js/core/jquery.min.js"></script>
   <script src="assets/js/core/popper.min.js"></script>
