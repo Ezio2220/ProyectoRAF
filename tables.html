@@ -57,7 +57,7 @@
           <li>
             <a href="./notifications.html">
               <i class="now-ui-icons ui-1_bell-53"></i>
-              <p>Notifications</p>
+              <p>Proveedores</p>
             </a>
           </li>
           <li>
@@ -199,11 +199,11 @@
                   </div>
                   <div class="form-group">
                       <label>Cliente</label>
-                      <input id="cliente" type="text" class="form-control" placeholder="Franklin Fuentes" value="">
+                      <select onmouseover="cargardatos(this.id,'Clientes','nombre',0,1);" class="form-control"  name="cliente" id="Clientes"></select>
                   </div>
                   <div class="form-group">
                       <label>Vendedor</label>
-                      <input id="vendedor" type="text" class="form-control" placeholder="Juan Lopez" value="">
+                      <select onmouseover="cargardatos(this.id,'Vendedores','nombre',0,0);" class="form-control"  name="vendedor" id="Vendedores"></select>
                   </div>
                 </form>
               </div>
@@ -314,6 +314,7 @@
       </footer>
     </div>
   </div>
+  <div id="editar"></div>
   <!--   necesarios para trabajar con la base de datos   -->
   <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase.js"></script>
   <script src="assets/js/funciones.js"></script> 
