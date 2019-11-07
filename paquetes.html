@@ -20,7 +20,7 @@
   <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 <!-- conultar global lo unico que cambiaras es el nombre de la tabla de la que tomara los datos lo demas dejalo igual que aca-->
-<body onload="comprobar();consultarglobal('Clientes',0,1);" class=""> <!--#########################3 lo mismo del comprobar antes de consultar en onload.-->
+<body onload="//comprobar();consultarglobal('Clientes',0,1);" class=""> <!--#########################3 lo mismo del comprobar antes de consultar en onload.-->
   <div id="todo" hidden class="wrapper ">  <!-- #################################se le pone hidden y el id todo para que si alguien intenta entrar sin logearse lo devuelva y no le muestre nada-->
     <div class="sidebar" data-color="orange">
       <!--
@@ -42,7 +42,7 @@
               <p>Inicio</p>
             </a>
           </li>
-          <li class="active ">
+          <li>
             <a href="./icons.html">
               <i class="now-ui-icons business_badge"></i>
               <p>Clientes</p>
@@ -84,7 +84,7 @@
               <p>servicio FotoEstudio</p>
             </a>
           </li>
-          <li>
+          <li class="active">
             <a href="./paquetes.html">
               <i class="now-ui-icons media-1_album"></i>
               <p>Paquetes de Fotografia</p>
@@ -111,7 +111,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Clientes</a>
+            <a class="navbar-brand" href="#pablo">Paquetes de fotografia</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -173,7 +173,7 @@
           <div class="col-md-8">
             <div class="card">
               <div class="card-header">
-                <h5 class="title">Clientes</h5>
+                <h5 class="title">Paquetes de Fotografia</h5>
               </div>
               <div class="card-body">
                 <form>
@@ -182,38 +182,24 @@
                     <div class="col-md-3 px-1">
                       <div class="form-group">
                         <label>Nombre</label>
-                        <input id="nombre"  type="text" class="form-control" placeholder="Ronal Aleman" value=""><!-- CADA INPUT debe tener un id que haga referencia al nombre de dato, este nombre de id debe ser igual del que tendra el dato en la bd-->
+                        <input id="nombre"  type="text" class="form-control" placeholder="graduacion" value=""><!-- CADA INPUT debe tener un id que haga referencia al nombre de dato, este nombre de id debe ser igual del que tendra el dato en la bd-->
                       </div>
                     </div>
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Direccion</label>
-                        <input id="direccion"  type="email" class="form-control" placeholder="San Miguel">
+                        <label for="detalle">Detalle</label>
+                        <input id="detalle"  type="text" class="form-control" placeholder="2 fotos tamaño cedula, 2 cuadros tamaño 30x50">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6 pr-1">
                       <div class="form-group">
-                        <label>Telefono</label>
-                        <input id="telefono" type="number" class="form-control" placeholder="75657484" value="">
+                        <label>Precio</label>
+                        <input id="precio" type="number" class="form-control" placeholder="$" value="">
                       </div>
                     </div>
-                    <div class="col-md-6 pl-1">
-                      <div class="form-group">
-                        <label>DUI</label>
-                        <input id="DUI" type="text" class="form-control" placeholder="38789230-0" value="">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label>NIT</label>
-                        <input id="NIT" type="text" class="form-control" placeholder="8039-011194-101-0" value="">
-                      </div>
-                    </div>
-                  </div>
+                    
                 </form>
               </div>
             </div>
@@ -254,19 +240,17 @@
         <div id="tablezone" style="display:none;" class="row"><!-- EL ID PARA LA TABLA PARA QUE PUEDA ABRIRSE DESPUES ADEMAS DE LA PROPIEDAD display none PARA QUE ESTE OCULTA-->
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title">Consulta de Clientes</h5>
+                    <h5 class="title">Consulta de Paquetes de Fotografia</h5>
                   </div>
                 <div class="card-body" id="datatable">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>
-                                <th class="text-center">DUi</th>
-                                <th class="text-center">NIT</th>
-                                <th class="text-center">Direccion</th>
-                                <th class="text-center">Nombre</th>
-                                <th class="text-center">Telefono</th>
-                                <th class="text-center">Acciones</th>
+                                <th class="text-center">nombre</th>
+                                <th class="text-center">Detalle</th>
+                                <th class="text-center">Cantidad</th>
+                                <th class="text-center">Precio</th>
                             </tr>
                         </thead>
                         <tbody id="datos"><!-- SE DEJAN POR DEFAULT EL TBODY VACIO Y ADEMAS SE LE PONE EL ID DATOS PARA QUE ASI SE AÑADAN DATOS A EL-->

@@ -684,7 +684,7 @@ function total(){
 //----------------------------------------------------------------------------SESIONES--------------------------------------
 const clave = window.localStorage;
 //"D:/works/0/2019/TSI/ProyectoRAF/";
-const base ="https://ezio2220.github.io/ProyectoRAF/";
+const base ="D:/works/0/2019/TSI/ProyectoRAF/";//"https://ezio2220.github.io/ProyectoRAF/";
 
 function salir(){
   console.log(clave.getItem('active'));
@@ -700,6 +700,9 @@ function salir(){
   setTimeout(function(){window.location.href = base+'login/index.html';},1000);
 }
 function comprobar(){
+  //mientras se hacen pruebas..
+  document.getElementById("todo").hidden=false;
+  /*
   if(clave.getItem('active')==null){
     nowuiDashboard.showNotification('top','center',"<b>Debe iniciar sesion!</b>","danger");
       setTimeout(function(){window.location.href = base+'login/index.html';},1000);
@@ -730,5 +733,5 @@ function comprobar(){
         nowuiDashboard.showNotification('top','center',"<b>Bienvenido!</b>","success");
       }
      
-  }
+  }*/
 }
