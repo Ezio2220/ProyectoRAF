@@ -225,11 +225,11 @@
                   </div>
                   <div class="form-group">
                       <label>Cliente</label>
-                      <select onmouseover="cargardatos(this.id,'Clientes','nombre',0,1);" class="form-control"  name="cliente" id="Clientes"></select>
+                      <select onmouseover="cargardatos(this.id,'Clientes','nombre',0,0);" class="form-control"  name="cliente" id="cliente"></select>
                   </div>
                   <div class="form-group">
                       <label>Vendedor</label>
-                      <select onmouseover="cargardatos(this.id,'Vendedores','nombre',0,0);" class="form-control"  name="vendedor" id="Vendedores"></select>
+                      <select onmouseover="cargardatos(this.id,'Vendedores','nombre',0,0);" class="form-control"  name="vendedor" id="vendedor"></select>
                   </div>
                 </form>
               </div>
@@ -242,7 +242,7 @@
                 <img src="./assets/img/bg5.jpg" alt="...">
               </div>
               <div class="card-body" style="min-height: max-content;">
-                <input style="width:100%;" onclick="insertarglobal('Ventas',['cliente','detalle','fecha','subtotal','tipopago','total','vendedor']);" class="btn btn-success" type="button" value="AGREGAR">
+                <input style="width:100%;" onclick="insertarglobal('Ventas',['cliente','detalle','fecha','tipopago','total','vendedor'],1);" class="btn btn-success" type="button" value="AGREGAR">
                 <input style="width:100%;" onclick="mostrar('tablezone');" class="btn btn-warning adm" type="button" value="CONSULTAR">
        
               </div>
@@ -283,7 +283,6 @@
                                 <th class="text-center">Fecha</th>
                                 <th class="text-center">Total</th>
                                 <th class="text-center">Tipo De Pago</th>
-                                <th class="text-center">Subtotal</th>
                                 <th class="text-center">Vendedor</th>
                                 <th class="text-center">Acciones</th>
                             </tr>

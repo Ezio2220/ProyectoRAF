@@ -19,11 +19,31 @@ function mostrar(id){
   document.getElementById(id).style.display= "block";
 }
 //------------------------------------------------insertar  a cualquier tabla
-function insertarglobal(tbl,arreglo){
+function insertarglobal(tbl,arreglo,v=0){
 var base = firebase.database().ref(tbl);
 var obj = new Object;
+console.log("insertando");
 for(var i=0;i<arreglo.length;i++){
-  obj[arreglo[i]]=obtener(arreglo[i]);
+ 
+  if(v==1 && arreglo[i]=="detalle"){
+    console.log("una venta agregandose");
+    var n = document.getElementById("dettable").rows.length;
+    var det = "";
+    var detax ;
+    for(var j =1;j<n;j++){
+      console.log("producto N "+j);
+      detax = document.getElementById("d"+j).options.selectedIndex;
+      det+= document.getElementById("d"+j).options.item(detax).text;
+      //alert(detax+" "+document.getElementById("d"+j).options.item(detax).text);
+      det+=" *"+obtener("c"+j)+" : $"+obtener("s"+j);
+      det+=";";
+    }
+    obj[arreglo[i]]=det;
+    console.log("se acabo la venta");
+  }else{
+    obj[arreglo[i]]=obtener(arreglo[i]);
+  }
+  
 }
 base.once("value",function(snap){
  var aux = snap.val();
@@ -202,7 +222,6 @@ function update(tbl,id){
       obj["cliente"]=obtener("cliente1");
       obj["detalle"]=obtener("detalle1");
       obj["fecha"]=obtener("fecha1");
-      obj["subtotal"]=obtener("subtotal1");
       obj["tipopago"]=obtener("tipopago1");
       obj["total"]=obtener("total1");
       obj["vendedor"]=obtener("vendedor1");
