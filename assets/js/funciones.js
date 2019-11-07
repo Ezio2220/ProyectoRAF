@@ -370,7 +370,7 @@ switch(tbl){
     break;
   }
   case "Proveedores":{
-                "<form>"+
+             data="<form>"+
                   "<div class='row'>"+
                     "<div class='col-md-3 px-1'>"+
                       "<div class='form-group'>"+
@@ -393,7 +393,7 @@ switch(tbl){
     break;
   }
   case "Ventas":{
-                "<form>"+
+          data="<form>"+
                   "<div class='row'>"+
                     "<div class='col-md-4 pl-1'>"+
                       "<div class='form-group'>"+
@@ -599,7 +599,7 @@ db.once("value",function(snap){
 //----------------------------------------------------------------------------SESIONES--------------------------------------
 const clave = window.localStorage;
 //"D:/works/0/2019/TSI/ProyectoRAF/";
-const base = "https://ezio2220.github.io/ProyectoRAF/";
+const base ="C:/Users/Alejandro/Documents/GitHub/ProyectoRAF/"; //"https://ezio2220.github.io/ProyectoRAF/";
 
 function salir(){
   console.log(clave.getItem('active'));
