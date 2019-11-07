@@ -20,7 +20,7 @@
   <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 <!-- conultar global lo unico que cambiaras es el nombre de la tabla de la que tomara los datos lo demas dejalo igual que aca-->
-<body onload="//comprobar();consultarglobal('Clientes',0,1);" class=""> <!--#########################3 lo mismo del comprobar antes de consultar en onload.-->
+<body onload="comprobar();//consultarglobal('Clientes',0,1);" class=""> <!--#########################3 lo mismo del comprobar antes de consultar en onload.-->
   <div id="todo" hidden class="wrapper ">  <!-- #################################se le pone hidden y el id todo para que si alguien intenta entrar sin logearse lo devuelva y no le muestre nada-->
     <div class="sidebar" data-color="orange">
       <!--
@@ -179,26 +179,27 @@
                 <form>
                   <div class="row">
                     
-                    <div class="col-md-3 px-1">
+                    <div class="col-md-6">
                       <div class="form-group">
                         <label>Nombre</label>
                         <input id="nombre"  type="text" class="form-control" placeholder="graduacion" value=""><!-- CADA INPUT debe tener un id que haga referencia al nombre de dato, este nombre de id debe ser igual del que tendra el dato en la bd-->
                       </div>
                     </div>
-                    <div class="col-md-4 pl-1">
+                    <div class="col-md-6">
                       <div class="form-group">
                         <label for="detalle">Detalle</label>
                         <input id="detalle"  type="text" class="form-control" placeholder="2 fotos tamaño cedula, 2 cuadros tamaño 30x50">
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6 pr-1">
+                    <div class="col-md-6">
                       <div class="form-group">
                         <label>Precio</label>
                         <input id="precio" type="number" class="form-control" placeholder="$" value="">
                       </div>
-                    </div>
+                  </div>
+                </div>
+                    
+                    
                     
                 </form>
               </div>
@@ -231,7 +232,7 @@
                 </p>-->
               </div>
               <hr>
-       
+              
             </div>
             <!-- Y ACA TERMINARIAN ------------------------>
           </div>

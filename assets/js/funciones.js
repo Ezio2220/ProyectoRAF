@@ -702,6 +702,7 @@ function salir(){
 function comprobar(){
   //mientras se hacen pruebas..
   document.getElementById("todo").hidden=false;
+  document.head.innerHTML= document.head.innerHTML+"<style> .adm{ display:table;} </style>"
   /*
   if(clave.getItem('active')==null){
     nowuiDashboard.showNotification('top','center',"<b>Debe iniciar sesion!</b>","danger");
