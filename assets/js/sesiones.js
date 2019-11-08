@@ -1,7 +1,7 @@
 
   const clave = window.localStorage;
   //"D:/works/0/2019/TSI/ProyectoRAF/";
-  const base ="https://ezio2220.github.io/ProyectoRAF/";
+  const base ="D:/works/0/2019/TSI/ProyectoRAF/";//"https://ezio2220.github.io/ProyectoRAF/";
 function logearse(){
     var user = document.getElementById("nombre").value;
     var pass = document.getElementById("pass").value;

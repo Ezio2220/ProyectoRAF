@@ -14,6 +14,10 @@
 function obtener(id){
   return document.getElementById(id).value;
 }
+//---------------------------------------------insertar en el html
+function fillparte(id,datos){ //funcion para rellenar partes de un html atravez de su id
+  document.getElementById(id).innerHTML += datos; //.innerhtml inserta datos con codigo html directamente
+}
 //-------------------------------------------MOSTRAR TABLA
 function mostrar(id){
   document.getElementById(id).style.display= "block";
@@ -222,6 +226,8 @@ function update(tbl,id){
   var base;
   if(tbl=="paquete"){
     base=  firebase.database().ref("Productos/"+id);
+  }else if(tbl=="Foto"){
+    base=  firebase.database().ref("Ventas/"+id);
   }else{
     base=  firebase.database().ref(tbl+"/"+id);
   }
@@ -279,7 +285,18 @@ function update(tbl,id){
     case "Ventas":{
       var onj = new Object;
       obj["cliente"]=obtener("cliente1");
-      obj["detalle"]=obtener("detalle1");
+
+      var n = document.getElementById("dettable1").rows.length;
+      var det = "";      var detax ;
+      for(var j =1;j<n;j++){
+        console.log("producto N "+j);
+        detax = document.getElementById("d"+j+50).options.selectedIndex;
+        det+= document.getElementById("d"+j+50).options.item(detax).text;
+        //alert(detax+" "+document.getElementById("d"+j).options.item(detax).text);
+        det+=" *"+obtener("c"+j+50)+" : $"+obtener("s"+j+50);
+        det+=";";
+      }
+      obj["detalle"]==det;
       obj["fecha"]=obtener("fecha1");
       obj["tipopago"]=obtener("tipopago1");
       obj["total"]=obtener("total1");
@@ -293,19 +310,33 @@ function update(tbl,id){
   setTimeout(function(){location.reload()},3000);
 
 }
+function vaciarmodal(){
+  fillparte("editar","s");
+}
 function modaledit(tbl,id){
-
+  
   var modal = 
  " <div class='modal fade' id='Edt"+id+"' tabindex='-1' role='dialog' aria-labelledby='Edt"+id+"Label' aria-hidden='true'>"+
  " <div class='modal-dialog' role='document'>"+
 "    <div class='modal-content'>"+
 "      <div class='modal-header'>"+
-"        <h5 class='modal-title' id='Edt"+id+"Label'>Editar "+tbl+"</h5>"+
+"        <h5 class='modal-title' id='Edt"+id+"Label'>Editar "+tbl+"</h5>";
+if(tbl=="Ventas"){
+  modal+=
+"        <button type='button' onclick='location.reload();' class='close' data-dismiss='modal' aria-label='Close'>"+
+"          <span aria-hidden='true'>&times;</span>"+
+"        </button>"+
+"      </div>"+
+"      <div class='modal-body'>";
+}else{
+  modal+=
 "        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>"+
 "          <span aria-hidden='true'>&times;</span>"+
 "        </button>"+
 "      </div>"+
 "      <div class='modal-body'>";
+}
+
 var data= "";
 switch(tbl){
   case "Usuarios":{   //aca solo copias el formulario que usas para editar el mismo solo cambias los id poniendoles un 1 al final para diferenciarlos
@@ -465,49 +496,71 @@ switch(tbl){
   }
   case "Ventas":{
           data="<form>"+
-                  "<div class='row'>"+
-                    "<div class='col-md-4 pl-1'>"+
-                      "<div class='form-group'>"+
-                        "<label for='exampleInputEmail1'>Fecha</label>"+
-                        "<input id='fecha1' type='email' class='form-control' placeholder='3 Nov 2019'>"+
-                      "</div>"+
-                    "</div>"+
-                  "</div>"+
-                  "<div class='row'>"+
-                    "<div class='col-md-6 pr-1'>"+
-                      "<div class='form-group'>"+
-                        "<label>Detalle</label>"+
-                        "<input id='detalle1' type='text' class='form-control' placeholder='Detalles' value=''>"+
-                      "</div>"+
-                    "</div>"+
-                    "<div class='col-md-6 pl-1'>"+
-                      "<div class='form-group'>"+
-                        "<label>Subtotal</label>"+
-                        "<input id='subtotal1' type='text' class='form-control' placeholder='$' value=''>"+
-                      "</div>"+
-                    "</div>"+
-                  "</div>"+
-                  "<div class='row'>"+
-                    "<div class='col-md-12'>"+
-                      "<div class='form-group'>"+
-                        "<label>Total</label>"+
-                        "<input id='total1' type='text' class='form-control' placeholder='$' value=''>"+
-                      "</div>"+
-                      "<div class='form-group'>"+
-                        "<label>Tipo De Pago</label>"+
-                        "<input id='tipopago1' type='text' class='form-control' placeholder='Efectivo' value=''>"+
-                      "</div>"+
-                    "</div>"+
-                  "</div>"+
-                  "<div class='form-group'>"+
-                      "<label>Cliente</label>"+
-                      "<input id='cliente1' type='text' class='form-control' placeholder='Franklin Fuentes' value=''>"+
-                  "</div>"+
-                  "<div class='form-group'>"+
-                      "<label>Vendedor</label>"+
-                      "<input id='vendedor1' type='text' class='form-control' placeholder='Juan Lopez' value=''>"+
-                  "</div>"+
-                "</form>";
+        "  <div class='row'>"+
+        "    <div class='col-md-4 pl-1'>"+
+        "      <div class='form-group'>"+
+        "        <label for='exampleInputEmail1'>Fecha</label>"+
+        "        <input id='fecha1' type='date' class='form-control' placeholder='3 Nov 2019'>"+
+        "      </div>"+
+        "    </div>"+
+        "    <div class='col'>"+
+        "          <input onclick='agregardetalle(0,1);' id='add1' style='margin-left: 40%;' type='button' class='btn btn-success' value='Agregar otro producto'>"+
+        "      </div>"+
+        "  </div>"+
+        "  <div class='row'>"+
+        "    <div class='col'>"+
+        "      <div class='form-group'>"+
+         "       <label>Detalle</label>"+
+         "       <table id='dettable1' class='table'>"+
+         "           <thead>"+
+         "               <tr>"+
+         "                   <th class='text-center'>Producto</th>"+
+         "                   <th class='text-center'>Cantidad</th>"+
+         "                   <th class='text-center'>Precio</th>"+
+         "                   <th class='text-center'>Subtotal</th>"+
+         "               </tr>"+
+         "           </thead>"+
+         "           <tbody id='detdata1'>"+
+        "                <tr>"+
+         "                 <td><select onchange='selector(this.id);' aria-placeholder='seleccione los productos de la venta' class='form-control' onmouseover=\"cargardatos(this.id,'Productos','nombre',0,0,1);\" name='detalle' id='d51'>"+
+         "                   </select>"+
+         "                 </td>"+
+         "                 <td>"+
+         "                   <input onchange='selector(this.id);' class='form-control' value='1' id='c51' type='number' min='1'>"+
+         "                 </td>"+
+         "                 <td>"+
+         "                     <input class='form-control' id='p51' readonly type='number' placeholder='$' >"+
+         "                 </td>"+
+         "                 <td>"+
+         "                     <input class='form-control' id='s51' readonly type='number' placeholder='$' >"+
+         "                 </td>"+
+         "               </tr>"+
+         "           </tbody>"+
+         "       </table>"+
+         "     </div>"+
+         "   </div>"+
+         " </div>"+
+         " <div class='row'>"+
+            "<div class='col-md-12'>"+
+              "<div class='form-group'>"+
+                "<label>Total</label>"+
+                "<input id='total1' readonly type='number' class='form-control' placeholder='$' value=''>"+
+              "</div>"+
+              "<div class='form-group'>"+
+                "<label>Tipo De Pago</label>"+
+                "<input id='tipopago1' type='text' class='form-control' placeholder='Efectivo' value=''>"+
+              "</div>"+
+            "</div>"+
+          "</div>"+
+          "<div class='form-group'>"+
+              "<label>Cliente</label>"+
+              "<select onmouseover=\"cargardatos(this.id,'Clientes','nombre',0,0);\" class='form-control'  name='cliente' id='cliente1'></select>"+
+          "</div>"+
+          "<div class='form-group'>"+
+              "<label>Vendedor</label>"+
+              "<select onmouseover=\"cargardatos(this.id,'Vendedores','nombre',0,0);\" class='form-control'  name='vendedor' id='vendedor1'></select>"+
+          "</div>"+
+        "</form>:";
     break;
   }
   case "paquete":{
@@ -537,16 +590,30 @@ switch(tbl){
   }
 }
 modal+=data;
-modal+=
-        "        <br>"+
+if(tbl=="Ventas"){
+  modal+=
+  "        <br>"+
 "      </div>"+
 "      <div class='modal-footer'>"+
-"        <button type='button' class='btn btn-secondary' data-dismiss='modal'>Cerrar</button>"+
-"        <button type='button' id='"+id+"' onclick=\"update('"+tbl+"',this.id);\" class='btn btn-primary'>Actualizar Datos</button>"+
+"        <button type='button' onclick='location.reload();' class='btn btn-secondary' data-dismiss='modal'>Cerrar</button>"+
+"        <button type='button'  id='"+id+"' onclick=\"update('"+tbl+"',this.id);\" class='btn btn-primary'>Actualizar Datos</button>"+
 "      </div>"+
 "    </div>"+
 "  </div>"+
 "</div>";
+}else{
+  modal+=
+        "        <br>"+
+"      </div>"+
+"      <div class='modal-footer'>"+
+"        <button type='button'  class='btn btn-secondary' data-dismiss='modal'>Cerrar</button>"+
+"        <button type='button'  id='"+id+"' onclick=\"update('"+tbl+"',this.id);\" class='btn btn-primary'>Actualizar Datos</button>"+
+"      </div>"+
+"    </div>"+
+"  </div>"+
+"</div>";
+}
+
 console.log(modal);
 fillparte("editar",modal);
 
@@ -566,10 +633,7 @@ function borrar(tbl,id){
   nowuiDashboard.showNotification('top','center',mensaje,"danger");
   setTimeout(function(){location.reload()},3000);
 }
-//---------------------------------------------insertar en el html
-function fillparte(id,datos){ //funcion para rellenar partes de un html atravez de su id
-  document.getElementById(id).innerHTML += datos; //.innerhtml inserta datos con codigo html directamente
-}
+
 //---------------------------------------------consultar usuarios
 function consultar(){   ///funcion para consultar datos
   var db = firebase.database().ref("Usuarios"); //se crea instancia de la base datos centrandonos en usuarios
@@ -767,6 +831,9 @@ function cargardatos(id,tbl,campo,multiple=0,vend=0,v=0){
 var lista = document.getElementById(id);
 console.log(lista.length);
 if(lista.length>0){
+  //document.getElementById(id)=lista.innerHTML;
+  console.log(lista.options);
+  console.log(document.getElementById(id).reload);
  /* for(var i=lista.length;i>0;i--){
   lista.remove(i-1);
   }*/
@@ -908,10 +975,18 @@ db.once("value",function(snap){
 });
 
 }
-function agregardetalle(Foto=0){
-  var tabla = document.getElementById("dettable");
+function agregardetalle(Foto=0,edt=0){
+  var tabla;var content;
+  if(edt){
+    tabla = document.getElementById("dettable1");
+    content = document.getElementById("detdata1");
+  }else{
+    tabla = document.getElementById("dettable");
+    content = document.getElementById("detdata");
+  }
+
   var n = tabla.rows.length;
-  var content = document.getElementById("detdata");
+
   var add = "<tr>"+
   "<td><select onchange='selector(this.id);' aria-placeholder='seleccione los productos de la venta' class='form-control' onmouseover=\"cargardatos(this.id, ";
   if(Foto==1){
@@ -919,7 +994,18 @@ function agregardetalle(Foto=0){
   }else{
     add+= "'Productos'";
   }
-  add+=  ",'nombre',0,0,1);\" name='detalle' id='d"+n+"'>"+
+  if(edt){
+    add+=  ",'nombre',0,0,1);\" name='detalle' id='d5"+n+"'>"+
+    "    </select>"+
+      "</td>"+
+      "<td>"+
+        "<input onchange='selector(this.id);' class='form-control' value='1' id='c5"+n+"' type='number' min='1'>"+
+      "</td>"+
+      "<td><input class='form-control' id='p5"+n+"' readonly type='number' placeholder='$' ></td>"+
+      "<td><input class='form-control' id='s5"+n+"' readonly type='number' placeholder='$' ></td>"+
+    "</tr>";
+  }else{
+      add+=  ",'nombre',0,0,1);\" name='detalle' id='d"+n+"'>"+
 "    </select>"+
   "</td>"+
   "<td>"+
@@ -928,6 +1014,8 @@ function agregardetalle(Foto=0){
   "<td><input class='form-control' id='p"+n+"' readonly type='number' placeholder='$' ></td>"+
   "<td><input class='form-control' id='s"+n+"' readonly type='number' placeholder='$' ></td>"+
 "</tr>";
+  }
+
 content.innerHTML +=add;
 }
 function total(){
@@ -942,7 +1030,7 @@ function total(){
 //----------------------------------------------------------------------------SESIONES--------------------------------------
 const clave = window.localStorage;
 //"D:/works/0/2019/TSI/ProyectoRAF/";
-const base ="https://ezio2220.github.io/ProyectoRAF/";
+const base ="D:/works/0/2019/TSI/ProyectoRAF/";//"https://ezio2220.github.io/ProyectoRAF/";
 
 function salir(){
   console.log(clave.getItem('active'));
