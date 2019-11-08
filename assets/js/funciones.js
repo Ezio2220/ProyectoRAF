@@ -1226,7 +1226,7 @@ function comprobar(){
       if(user.substring(0,2)=="AD"){
         nowuiDashboard.showNotification('top','center',"<b>Bienvenido ADMIN!</b>","success");
        // document.getElementsByClassName("adm")
-        document.head.innerHTML= document.head.innerHTML+"<style> .adm{ display:table;} </style>"
+        document.head.innerHTML= document.head.innerHTML+"<style> .adm{ display:unset;} </style>"
       }else{
         nowuiDashboard.showNotification('top','center',"<b>Bienvenido!</b>","success");
       }
