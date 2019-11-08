@@ -283,20 +283,20 @@ function update(tbl,id){
       break;
     }
     case "Ventas":{
-      var onj = new Object;
+      var obj = new Object;
       obj["cliente"]=obtener("cliente1");
 
       var n = document.getElementById("dettable1").rows.length;
       var det = "";      var detax ;
       for(var j =1;j<n;j++){
-        console.log("producto N "+j);
-        detax = document.getElementById("d"+j+50).options.selectedIndex;
-        det+= document.getElementById("d"+j+50).options.item(detax).text;
+        console.log("producto N 5"+j);
+        detax = document.getElementById("d5"+j).options.selectedIndex;
+        det+= document.getElementById("d5"+j).options.item(detax).text;
         //alert(detax+" "+document.getElementById("d"+j).options.item(detax).text);
-        det+=" *"+obtener("c"+j+50)+" : $"+obtener("s"+j+50);
+        det+=" : $"+obtener("s5"+j);
         det+=";";
       }
-      obj["detalle"]==det;
+      obj["detalle"]=det;
       obj["fecha"]=obtener("fecha1");
       obj["tipopago"]=obtener("tipopago1");
       obj["total"]=obtener("total1");
@@ -522,11 +522,11 @@ switch(tbl){
          "           </thead>"+
          "           <tbody id='detdata1'>"+
         "                <tr>"+
-         "                 <td><select onchange='selector(this.id);' aria-placeholder='seleccione los productos de la venta' class='form-control' onmouseover=\"cargardatos(this.id,'Productos','nombre',0,0,1);\" name='detalle' id='d51'>"+
+         "                 <td><select onchange='selector(this.id,0,1);' aria-placeholder='seleccione los productos de la venta' class='form-control' onmouseover=\"cargardatos(this.id,'Productos','nombre',0,0,1);\" name='detalle' id='d51'>"+
          "                   </select>"+
          "                 </td>"+
          "                 <td>"+
-         "                   <input onchange='selector(this.id);' class='form-control' value='1' id='c51' type='number' min='1'>"+
+         "                   <input onchange='selector(this.id,0,1);' class='form-control' value='1' id='c51' type='number' min='1'>"+
          "                 </td>"+
          "                 <td>"+
          "                     <input class='form-control' id='p51' readonly type='number' placeholder='$' >"+
@@ -586,6 +586,10 @@ switch(tbl){
     "</div>"+
   "</div>"+
   "</form>";
+    break;
+  }
+  case "Foto":{
+
     break;
   }
 }
@@ -942,10 +946,10 @@ db.once("value",function(snap){
 
 }
 //-----------------------------------------------------------------aux ventas
-function selector(id,Foto=0){
+function selector(id,Foto=0,edt=0){
 var n =  parseInt(id.substring(1));
 var pro = obtener("d"+n);
-console.log(pro);
+console.log(edt);
 var cant = document.getElementById("c"+n);
 var pre = document.getElementById("p"+n);
 var sub = document.getElementById("s"+n);
@@ -971,7 +975,7 @@ db.once("value",function(snap){
     pre.value = parseFloat(ax["precio"]);
     sub.value = parseInt(cant.value) * parseFloat(pre.value);
     console.log("Se calculo");
-    total();
+    total(edt);
 });
 
 }
@@ -987,8 +991,15 @@ function agregardetalle(Foto=0,edt=0){
 
   var n = tabla.rows.length;
 
-  var add = "<tr>"+
+  var add ;
+  if(edt){
+    add= "<tr>"+
+    "<td><select onchange='selector(this.id,0,1);' aria-placeholder='seleccione los productos de la venta' class='form-control' onmouseover=\"cargardatos(this.id, ";
+  }else{
+    add= "<tr>"+
   "<td><select onchange='selector(this.id);' aria-placeholder='seleccione los productos de la venta' class='form-control' onmouseover=\"cargardatos(this.id, ";
+  }
+  
   if(Foto==1){
     add+= "'Foto'";
   }else{
@@ -999,7 +1010,7 @@ function agregardetalle(Foto=0,edt=0){
     "    </select>"+
       "</td>"+
       "<td>"+
-        "<input onchange='selector(this.id);' class='form-control' value='1' id='c5"+n+"' type='number' min='1'>"+
+        "<input onchange='selector(this.id,0,1);' class='form-control' value='1' id='c5"+n+"' type='number' min='1'>"+
       "</td>"+
       "<td><input class='form-control' id='p5"+n+"' readonly type='number' placeholder='$' ></td>"+
       "<td><input class='form-control' id='s5"+n+"' readonly type='number' placeholder='$' ></td>"+
@@ -1018,14 +1029,30 @@ function agregardetalle(Foto=0,edt=0){
 
 content.innerHTML +=add;
 }
-function total(){
-  var tabla = document.getElementById("dettable");
+function total(edt=0){
+  var tabla ;
+  if(edt){
+    tabla= document.getElementById("dettable1");
+  }else{
+    tabla= document.getElementById("dettable");
+  }
+  
   var n = tabla.rows.length;
   var suma=0;
   for(var i=1;i<n;i++){
-    suma+= parseFloat(obtener("s"+i));
+    if(edt){
+      suma+= parseFloat(obtener("s5"+i));
+    }else{
+      suma+= parseFloat(obtener("s"+i));
+    }
+    
   }
-  document.getElementById("total").value = suma;
+  if(edt){
+    document.getElementById("total1").value = suma;
+  }else{
+    document.getElementById("total").value = suma;
+  }
+  
 }
 //----------------------------------------------------------------------------SESIONES--------------------------------------
 const clave = window.localStorage;
