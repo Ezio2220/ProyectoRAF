@@ -1185,9 +1185,8 @@ function salir(){
 }
 function comprobar(){
   //mientras se hacen pruebas..
-  document.getElementById("todo").hidden=false;
-  document.head.innerHTML= document.head.innerHTML+"<style> .adm{ display:table;} </style>"
-  /*
+  
+  
   if(clave.getItem('active')==null){
     nowuiDashboard.showNotification('top','center',"<b>Debe iniciar sesion!</b>","danger");
       setTimeout(function(){window.location.href = base+'login/index.html';},1000);
@@ -1218,5 +1217,5 @@ function comprobar(){
         nowuiDashboard.showNotification('top','center',"<b>Bienvenido!</b>","success");
       }
      
-  }*/
+  }
 }
