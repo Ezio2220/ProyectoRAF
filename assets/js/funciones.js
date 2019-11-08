@@ -838,8 +838,8 @@ db.once("value",function(snap){
         console.log(camp);
       }
     }else{
-      if(tbl=="Venta"){
-        if(documento.substring(0,4)==tbl.substring(0,4)){
+      if(tbl=="Productos"){
+        if(documento.substring(0,4)=="Prod"){
           data= document.createElement("option");  
           c = aux[documento];
           camp = c[campo];
