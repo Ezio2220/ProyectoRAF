@@ -1185,8 +1185,6 @@ function salir(){
 }
 function comprobar(){
   //mientras se hacen pruebas..
-  
-  
   if(clave.getItem('active')==null){
     nowuiDashboard.showNotification('top','center',"<b>Debe iniciar sesion!</b>","danger");
       setTimeout(function(){window.location.href = base+'login/index.html';},1000);
