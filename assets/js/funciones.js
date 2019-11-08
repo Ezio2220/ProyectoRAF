@@ -27,7 +27,7 @@ function existencias(id,val){
   var database = firebase.database().ref("Productos/"+id);
   var obj2 = new Object();
   var n1,n2;
-  alert("editando "+id+" con "+val);
+ // alert("editando "+id+" con "+val);
   n2 = parseFloat(val);
   database.once("value",function(snap2){
     var ax2 = snap2.val();
@@ -72,12 +72,28 @@ for(var i=0;i<arreglo.length;i++){
       det+=" *"+obtener("c"+j)+" : $"+obtener("s"+j);
       det+=";";
       if(tbl=="Ventas"){
-        alert("actualizar existencias");
+       // alert("actualizar existencias");
         existencias(document.getElementById("d"+j).value,obtener("c"+j));
       }
     }
     obj[arreglo[i]]=det;
     console.log("se acabo la venta");
+  }else if(arreglo[i]=="cliente" || arreglo[i]=="vendedor"){
+    var det="";
+    var detax;
+    detax = document.getElementById(arreglo[i]).options.selectedIndex;
+      det= document.getElementById(arreglo[i]).options.item(detax).text;
+      obj[arreglo[i]]=det;
+  }else if (arreglo[i]=="detalle"){
+    var sel = document.getElementById(arreglo[i]).selectedOptions;
+    var det="";
+    for(var j=0;j<sel.length;j++){
+      det+=sel[i].label;
+      if(j!=sel.length-1){
+        det+=",";
+      }
+    }
+    obj[arreglo[i]]=det;
   }else{
     obj[arreglo[i]]=obtener(arreglo[i]);
   }
@@ -1022,12 +1038,12 @@ db.once("value",function(snap){
           data= document.createElement("option");  
           c = aux[documento];
           camp = c[campo];
-          if( parseInt(c["cantidad"])==0){
+          if( parseInt(c["cantidad"])==0 && multiple == 0){
             data.disabled=true;
           }
           data.text=camp;
           data.value=documento;
-          if(v>0){
+          if(v>0 || multiple){
             console.log("es una venta");
             data.text = camp+" "+c["marca"];
           }
