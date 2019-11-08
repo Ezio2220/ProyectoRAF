@@ -83,7 +83,16 @@ base.once("value",function(snap){
         if(documento.substring(0,4)=="Foto"){
           n++;
         }
-      }else{
+      }else if(tbl=="Productos"){
+        if(documento.substring(0,4)=="Prod"){
+          n++;
+        }
+      }else if(tbl=="Ventas"){
+        if(documento.substring(0,4)=="Vent"){
+          n++;
+        }
+      }
+      else{
         n++;
       }
     }
@@ -664,6 +673,60 @@ db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
             tabla += filltablav2(tmp,1,documento,tbl);
          }
         }
+      }else if(tbl=="Productos"){
+        if(documento.substring(0,4)=="Prod"){
+          cont++;
+          tmp =Object.values(aux[documento]); 
+          tmpax = tmp;
+          if(id){
+            tmpax.push(documento);
+          }
+          for(var i=0;i<tmpax.length;i++){//para reordenar las cosas
+           if(id){
+             if(i==0){
+               tmp[0]=documento;
+             }else{
+               tmp[i]=tmpax[i-1];
+             }
+           }else{
+             tmp[i]=tmpax[i];
+           }
+          }
+          console.log(tmp);
+
+             if(num){
+               tabla += filltablav2(tmp,1,documento,tbl,cont);
+             }else{
+                tabla += filltablav2(tmp,1,documento,tbl);
+             }
+        }
+      }else if(tbl=="Ventas"){
+        if(documento.substring(0,4)=="Vent"){
+          cont++;
+          tmp =Object.values(aux[documento]); 
+          tmpax = tmp;
+          if(id){
+            tmpax.push(documento);
+          }
+          for(var i=0;i<tmpax.length;i++){//para reordenar las cosas
+           if(id){
+             if(i==0){
+               tmp[0]=documento;
+             }else{
+               tmp[i]=tmpax[i-1];
+             }
+           }else{
+             tmp[i]=tmpax[i];
+           }
+          }
+          console.log(tmp);
+
+             if(num){
+               tabla += filltablav2(tmp,1,documento,tbl,cont);
+             }else{
+                tabla += filltablav2(tmp,1,documento,tbl);
+             }
+        }
       }else{
         cont++;
       tmp =Object.values(aux[documento]); 
@@ -775,25 +838,34 @@ db.once("value",function(snap){
         console.log(camp);
       }
     }else{
-      data= document.createElement("option");  
-    c = aux[documento];
-    camp = c[campo];
-    data.text=camp;
-    data.value=documento;
-    if(v>0){
-      console.log("es una venta");
-      data.text = camp+" "+c["marca"];
-      
-      /*
-    c = aux[documento];
-    camp = c[campo];
-    data.text=camp;
-    data.value=documento;
-    lista.add(data);
-    console.log(camp);*/
-    }
-    lista.add(data);
-    console.log(camp);
+      if(tbl=="Venta"){
+        if(documento.substring(0,4)==tbl.substring(0,4)){
+          data= document.createElement("option");  
+          c = aux[documento];
+          camp = c[campo];
+          data.text=camp;
+          data.value=documento;
+          if(v>0){
+            console.log("es una venta");
+            data.text = camp+" "+c["marca"];
+          }
+          lista.add(data);
+          console.log(camp);
+        }
+      }else{
+        data= document.createElement("option");  
+        c = aux[documento];
+        camp = c[campo];
+        data.text=camp;
+        data.value=documento;
+        if(v>0){
+          console.log("es una venta");
+          data.text = camp+" "+c["marca"];
+        }
+        lista.add(data);
+        console.log(camp);
+      }
+
     }
 
   }
