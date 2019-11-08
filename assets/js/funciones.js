@@ -22,6 +22,22 @@ function fillparte(id,datos){ //funcion para rellenar partes de un html atravez 
 function mostrar(id){
   document.getElementById(id).style.display= "block";
 }
+//------------------------------------------------------------------------------------Actualizar Existencias
+function existencias(id,val){
+  var database = firebase.database().ref("Productos/"+id);
+  var obj2 = new Object();
+  var n1,n2;
+  alert("editando "+id+" con "+val);
+  n2 = parseFloat(val);
+  database.once("value",function(snap2){
+    var ax2 = snap2.val();
+    obj2 = ax2;
+    n1=parseFloat(obj2["cantidad"]);
+    obj2["cantidad"]= n1-n2;
+    database.set(obj2);
+
+  });
+}
 //##################################################################################################################################################################
 //------------------------------------------------insertar  a cualquier tabla
 function insertarglobal(tbl,arreglo,v=0){
@@ -55,6 +71,10 @@ for(var i=0;i<arreglo.length;i++){
       //alert(detax+" "+document.getElementById("d"+j).options.item(detax).text);
       det+=" *"+obtener("c"+j)+" : $"+obtener("s"+j);
       det+=";";
+      if(tbl=="Ventas"){
+        alert("actualizar existencias");
+        existencias(document.getElementById("d"+j).value,obtener("c"+j));
+      }
     }
     obj[arreglo[i]]=det;
     console.log("se acabo la venta");
@@ -227,6 +247,7 @@ function update(tbl,id){
   if(tbl=="paquete"){
     base=  firebase.database().ref("Productos/"+id);
   }else if(tbl=="Foto"){
+    console.log("fotox1");
     base=  firebase.database().ref("Ventas/"+id);
   }else{
     base=  firebase.database().ref(tbl+"/"+id);
@@ -303,7 +324,8 @@ function update(tbl,id){
       obj["vendedor"]=obtener("vendedor1");
       break;
     }
-    case "Fotos":{
+    case "Foto":{
+      console.log("fotox1");
       var obj = new Object;
       obj["cliente"]=obtener("cliente1");
       var n = document.getElementById("dettable1").rows.length;
@@ -321,6 +343,7 @@ function update(tbl,id){
       obj["tipopago"]=obtener("tipopago1");
       obj["total"]=obtener("total1");
       obj["vendedor"]=obtener("vendedor1");
+      console.log(obj);
       break;
     }
   }
@@ -713,6 +736,8 @@ function borrar(tbl,id){
   var base;
   if(tbl=="paquete"){
     base = firebase.database().ref("Productos/"+id);
+  }else if(tbl=="Foto"){
+    base = firebase.database().ref("Ventas/"+id);
   }else{
     base = firebase.database().ref(tbl+"/"+id);
   }
@@ -922,7 +947,6 @@ console.log(lista.length);
 if(lista.length>0){
   //document.getElementById(id)=lista.innerHTML;
   console.log(lista.options);
-  console.log(document.getElementById(id).reload);
  /* for(var i=lista.length;i>0;i--){
   lista.remove(i-1);
   }*/
@@ -940,7 +964,6 @@ if(tbl=="Foto"){
 }else{
   db= firebase.database().ref(tbl); 
 }
-
 
 db.once("value",function(snap){ 
   var aux = snap.val(); 
@@ -999,6 +1022,9 @@ db.once("value",function(snap){
           data= document.createElement("option");  
           c = aux[documento];
           camp = c[campo];
+          if( parseInt(c["cantidad"])==0){
+            data.disabled=true;
+          }
           data.text=camp;
           data.value=documento;
           if(v>0){
@@ -1050,9 +1076,9 @@ db.once("value",function(snap){
       if(id.substring(0,1)!='c'){
         cant.value=1;
       }else{
-        if(cant.value>cant.max){
+       /* if(cant.value>cant.max){
           cant.value=cant.max;
-        }
+        }*/
       }
     }
     
