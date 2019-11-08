@@ -7,7 +7,7 @@
   <link rel="icon" type="image/vnd.microsoft.icon" href="assets/img/favicon.ico">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Vendedores
+    Ventas
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -20,7 +20,7 @@
   <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 
-<body onload="comprobar(); consultarglobal('Vendedores',0,1);" class="">
+<body onload="comprobar(); consultarglobal('Ventas',0,1);" class="">
   <div id="todo" hidden class="wrapper ">
     <div class="sidebar" data-color="orange">
       <!--
@@ -43,37 +43,37 @@
           </a>
         </li>
         <li class="active ">
-          <a href="./icons.html">
+          <a href="./clientes.html">
             <i class="now-ui-icons business_badge"></i>
             <p>Clientes</p>
           </a>
         </li>
         <li>
-          <a href="./map.html">
+          <a href="./productos.html">
             <i class="now-ui-icons shopping_tag-content"></i>
             <p>Productos</p>
           </a>
         </li>
         <li>
-          <a href="./notifications.html">
+          <a href="./proveedores.html">
             <i class="now-ui-icons shopping_delivery-fast"></i>
             <p>Proveedores</p>
           </a>
         </li>
         <li>
-          <a href="./user.html">
+          <a href="./usuarios.html">
             <i class="now-ui-icons users_single-02"></i>
             <p>Usuarios</p>
           </a>
         </li>
         <li>
-          <a href="./tables.html">
+          <a href="./ventas.html">
             <i class="now-ui-icons business_money-coins"></i>
             <p>Ventas</p>
           </a>
         </li>
         <li>
-          <a href="./typography.html">
+          <a href="./vendedores.html">
             <i class="now-ui-icons business_briefcase-24"></i>
             <p>Vendedores</p>
           </a>
@@ -111,7 +111,7 @@
               <span class="navbar-toggler-bar bar3"></span>
             </button>
           </div>
-          <a class="navbar-brand" href="typography.html">Vendedores</a>
+          <a class="navbar-brand" href="ventas.html">Ventas</a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -171,51 +171,77 @@
           <div class="col-md-8">
             <div class="card">
               <div class="card-header">
-                <h5 class="title">Vendedores</h5>
+                <h5 class="title">Ventas</h5>
               </div>
               <div class="card-body">
                 <form>
                   <div class="row">
-                    
-                    <div class="col-md-3 px-1">
-                      <div class="form-group">
-                        <label>Nombre</label>
-                        <input id="nombre" type="text" class="form-control" placeholder="Ronal Aleman" value="">
-                      </div>
-                    </div>
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Direccion</label>
-                        <input id="direccion" type="email" class="form-control" placeholder="San Miguel">
+                        <label for="exampleInputEmail1">Fecha</label>
+                        <input id="fecha" type="date" class="form-control" placeholder="3 Nov 2019">
                       </div>
                     </div>
+                    <div class="col">
+                          <input onclick="agregardetalle();" id="add" style="margin-left: 50%;" type="button" class="btn btn-success" value="Agregar otro producto">
+                        
+                      </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-6 pl-1">
+                    <div class="col">
                       <div class="form-group">
-                        <label>DUI</label>
-                        <input id="DUI" type="text" class="form-control" placeholder="38789230-0" value="">
+                        <label>Detalle</label>
+                        <table id="dettable" class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Producto</th>
+                                    <th class="text-center">Cantidad</th>
+                                    <th class="text-center">Precio</th>
+                                    <th class="text-center">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody id="detdata">
+                                <tr>
+                                  <td><select onchange="selector(this.id);" aria-placeholder="seleccione los productos de la venta" class="form-control" onmouseover="cargardatos(this.id,'Productos','nombre',0,0,1);" name="detalle" id="d1">
+
+                                    </select>
+                                  </td>
+                                  <td>
+                                    <input onchange="selector(this.id);" class="form-control" value="1" id="c1" type="number" min="1">
+                                  </td>
+                                  <td>
+                                      <input class="form-control" id="p1" readonly type="number" placeholder="$" >
+                                  </td>
+                                  <td>
+                                      <input class="form-control" id="s1" readonly type="number" placeholder="$" >
+                                  </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
                       </div>
                     </div>
+                    
                   </div>
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label>NIT</label>
-                        <input id="NIT" type="text" class="form-control" placeholder="8039-011194-101-0" value="">
+                        <label>Total</label>
+                        <input id="total" readonly type="number" class="form-control" placeholder="$" value="">
                       </div>
-                    </div>
-                    <div class="col-md-6 pr-1">
                       <div class="form-group">
-                        <label>Usuarios</label>
-                        <select onmouseover="cargardatos(this.id,'Usuarios','Nombre',0,1);" class="form-control"  name="usuario" id="Usuarios">
-                        <!-- (el id del select debe ser igual al nombre del campo que se tendra en la bd) VAYA SE SUSTITUYE EL input por un select que debe estar vacio le pones un id al select, y por el metodo onmouseover le cargas la funcion donde solo cambiara la tabla("Usuarios") para el ejemplo
-                        , el nombre del campo de la bd que vera el usuario "Nombre" en este caso ya que mostramos el nombre de los usuarios en la bd, y por ultimo si queres seleccion multiple o no osea si se puede elegir masd e 1 al mismo tiempo en aso que no queras podes dejarlo vacio
-                      pero si queres que se puedan elegir varios al mismo tiempo le pones un 1-->
-                        </select>
-                        <!--input id="usuario" type="text" class="form-control" placeholder="User" value=""-->
+                        <label>Tipo De Pago</label>
+                        <input id="tipopago" type="text" class="form-control" placeholder="Efectivo" value="">
                       </div>
                     </div>
+                  </div>
+                  <div class="form-group">
+                      <label>Cliente</label>
+                      <select onmouseover="cargardatos(this.id,'Clientes','nombre',0,0);" class="form-control"  name="cliente" id="cliente"></select>
+                  </div>
+                  <div class="form-group">
+                      <label>Vendedor</label>
+                      <select onmouseover="cargardatos(this.id,'Vendedores','nombre',0,0);" class="form-control"  name="vendedor" id="vendedor"></select>
                   </div>
                 </form>
               </div>
@@ -227,39 +253,28 @@
               <div class="image">
                 <img src="./assets/img/bg5.jpg" alt="...">
               </div>
-              <div class="card-body">
-                <input style="width:100%;" onclick="insertarglobal('Vendedores',['DUI','NIT','direccion','nombre','usuario']);" class="btn btn-success" type="button" value="AGREGAR">
+              <div class="card-body" style="min-height: max-content;">
+                <input style="width:100%;" onclick="insertarglobal('Ventas',['cliente','detalle','fecha','tipopago','total','vendedor'],1);" class="btn btn-success" type="button" value="AGREGAR">
                 <input style="width:100%;" onclick="mostrar('tablezone');" class="btn btn-warning adm" type="button" value="CONSULTAR">
-                <!--
-                <div class="author">
-                  <a href="#">
-                    <img class="avatar border-gray" src="../assets/img/mike.jpg" alt="...">
-                    <h5 class="title">Mike Andrew</h5>
-                  </a>
-                  <p class="description">
-                    michael24
-                  </p>
-                </div>
-                <p class="description text-center">
-                  "Lamborghini Mercy
-                  <br> Your chick she so thirsty
-                  <br> I'm in that two seat Lambo"
-                </p>-->
+       
               </div>
               <hr>
-              <!--
+              
               <div class="button-container">
-                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                  <i class="fab fa-facebook-f"></i>
-                </button>
-                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                  <i class="fab fa-twitter"></i>
-                </button>
-                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                  <i class="fab fa-google-plus-g"></i>
-                </button>
+                <!--table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Producto</th>
+                            <th class="text-center">Cantidad</th>
+                            <th class="text-center">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detdata">
+                        
+                    </tbody>
+                </table>-->
               </div>
-            -->
+            
             </div>
             <!-- Y ACA TERMINARIAN ------------------------>
           </div>
@@ -268,19 +283,20 @@
         <div id="tablezone" style="display:none;" class="row">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title">Consulta de Vendedores</h5>
+                    <h5 class="title">Consulta de Ventas</h5>
                   </div>
                 <div class="card-body" id="datatable">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th class="text-center">#</th>
-                                <th class="text-right">DUI</th>
-                                <th class="text-right">NIT</th>
-                                <th class="text-center">Direccion</th>
-                                <th class="text-center">Nombre</th>
-                                <th class="text-right">Usuarios</th>
-                                <th class="text-right">Acciones</th>
+                                <th class="text-center">N° De Factura</th>
+                                <th class="text-center">Cliente</th>
+                                <th class="text-center">Detalle</th>
+                                <th class="text-center">Fecha</th>
+                                <th class="text-center">Total</th>
+                                <th class="text-center">Tipo De Pago</th>
+                                <th class="text-center">Vendedor</th>
+                                <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="datos">
@@ -290,7 +306,7 @@
                 </div>
               </div>
         </div>
-          </div>
+      </div>
       <footer class="footer">
         <div class="container-fluid">
           <nav>
@@ -324,9 +340,7 @@
       </footer>
     </div>
   </div>
-  <div id="editar">
-
-  </div>
+  <div id="editar"></div>
   <!--   necesarios para trabajar con la base de datos   -->
   <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase.js"></script>
   <script src="assets/js/funciones.js"></script> 

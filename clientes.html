@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-  <link rel="icon" type="image/vnd.microsoft.icon" href="assets/img/favicon.ico">
+  <link rel="icon" type="image/vnd.microsoft.icon" href="assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Proveedores
+    Clientes
   </title>
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -19,19 +19,19 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
-
-<body onload="comprobar(); consultarglobal('Proveedores',0,1);" class="">
-  <div id="todo" hidden class="wrapper ">
+<!-- conultar global lo unico que cambiaras es el nombre de la tabla de la que tomara los datos lo demas dejalo igual que aca-->
+<body onload="comprobar();consultarglobal('Clientes',0,1);" class=""> <!--#########################3 lo mismo del comprobar antes de consultar en onload.-->
+  <div id="todo" hidden class="wrapper ">  <!-- #################################se le pone hidden y el id todo para que si alguien intenta entrar sin logearse lo devuelva y no le muestre nada-->
     <div class="sidebar" data-color="orange">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
       <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-          CT
+        <a href="" class="simple-text logo-mini">
+          RAF
         </a>
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-          Creative Tim
+        <a href="" class="simple-text logo-normal">
+          Metrocentro SM.
         </a>
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
@@ -42,46 +42,58 @@
               <p>Inicio</p>
             </a>
           </li>
-          <li>
-            <a href="./icons.html">
-              <i class="now-ui-icons education_atom"></i>
+          <li class="active ">
+            <a href="./clientes.html">
+              <i class="now-ui-icons business_badge"></i>
               <p>Clientes</p>
             </a>
           </li>
           <li>
-            <a href="./map.html">
-              <i class="now-ui-icons location_map-big"></i>
+            <a href="./productos.html">
+              <i class="now-ui-icons shopping_tag-content"></i>
               <p>Productos</p>
             </a>
           </li>
           <li>
-            <a href="./notifications.html">
-              <i class="now-ui-icons ui-1_bell-53"></i>
-              <p>Notifications</p>
+            <a href="./proveedores.html">
+              <i class="now-ui-icons shopping_delivery-fast"></i>
+              <p>Proveedores</p>
             </a>
           </li>
           <li>
-            <a href="./user.html">
+            <a href="./usuarios.html">
               <i class="now-ui-icons users_single-02"></i>
               <p>Usuarios</p>
             </a>
           </li>
           <li>
-            <a href="./tables.html">
-              <i class="now-ui-icons design_bullet-list-67"></i>
+            <a href="./ventas.html">
+              <i class="now-ui-icons business_money-coins"></i>
               <p>Ventas</p>
             </a>
           </li>
           <li>
-            <a href="./typography.html">
-              <i class="now-ui-icons text_caps-small"></i>
+            <a href="./vendedores.html">
+              <i class="now-ui-icons business_briefcase-24"></i>
               <p>Vendedores</p>
             </a>
           </li>
-          <li class="active  active-pro " class="active-pro">
-            <a href="./upgrade.html">
+          <li>
+            <a href="./Fotoestudio.html">
+              <i class="now-ui-icons media-1_camera-compact"></i>
+              <p>servicio FotoEstudio</p>
+            </a>
+          </li>
+          <li>
+            <a href="./paquetes.html">
+              <i class="now-ui-icons media-1_album"></i>
+              <p>Paquetes de Fotografia</p>
+            </a>
+          </li>
+          <li>
+            <a  href="javascript: salir();">
               <i class="now-ui-icons arrows-1_cloud-download-93"></i>
-              <p>Proveedores</p>
+              <p>Salir</p>
             </a>
           </li>
         </ul>
@@ -99,7 +111,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Proveedores</a>
+            <a class="navbar-brand" href="clientes.html">Clientes</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -140,10 +152,10 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a onclick="salir();" class="nav-link">
+                <a onclick="salir();" class="nav-link"><!--############################3temporal -->
                   <i class="now-ui-icons users_single-02"></i>
                   <p>
-                    <span  class="d-lg-none d-md-block">Cerrar Sesion</span>
+                    <span  class="d-lg-none d-md-block">Cerrar sesion</span>
                   </p>
                 </a>
               </li>
@@ -156,28 +168,49 @@
       </div>
       <div class="content">
         <div class="row">
+          <div class="content">
+        <div class="row">
           <div class="col-md-8">
             <div class="card">
               <div class="card-header">
-                <h5 class="title">Proveedores</h5>
+                <h5 class="title">Clientes</h5>
               </div>
               <div class="card-body">
                 <form>
                   <div class="row">
+                    
                     <div class="col-md-3 px-1">
                       <div class="form-group">
                         <label>Nombre</label>
-                        <input id="nombre" type="text" class="form-control" placeholder="Impresora" value="">
+                        <input id="nombre"  type="text" class="form-control" placeholder="Ronal Aleman" value=""><!-- CADA INPUT debe tener un id que haga referencia al nombre de dato, este nombre de id debe ser igual del que tendra el dato en la bd-->
                       </div>
                     </div>
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Detalles</label>
-                      <select onmouseover="cargardatos(this.id,'Productos','nombre',0,1);" class="form-control"  name="proveedor" id="Proveedores"></select>
+                        <label for="exampleInputEmail1">Direccion</label>
+                        <input id="direccion"  type="email" class="form-control" placeholder="San Miguel">
                       </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 pr-1">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Telefono</label>
-                        <input id="telefono" type="email" class="form-control" placeholder="78748400">
+                        <label>Telefono</label>
+                        <input id="telefono" type="number" class="form-control" placeholder="75657484" value="">
+                      </div>
+                    </div>
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label>DUI</label>
+                        <input id="DUI" type="text" class="form-control" placeholder="38789230-0" value="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>NIT</label>
+                        <input id="NIT" type="text" class="form-control" placeholder="8039-011194-101-0" value="">
                       </div>
                     </div>
                   </div>
@@ -192,9 +225,10 @@
                 <img src="./assets/img/bg5.jpg" alt="...">
               </div>
               <div class="card-body">
-                <input style="width:100%;" onclick="insertarglobal('Proveedores',['detalle','nombre','telefono']);" class="btn btn-success" type="button" value="AGREGAR">
-                <input style="width:100%;" onclick="mostrar('tablezone');" class="btn btn-warning adm" type="button" value="CONSULTAR">
-                <!--
+                <!--aca va LO DEL BOTON INSETAR LA FUNCION INSERTAR GLOBAL ES DE MAS DECIRTE QUE LO PRIMERO ES EL NOMBRE DE LA TABLA DE LA BASE DE DATOS Y LO DEMAS ES UN ARREGLO DEL NOMBRE DE LOS DATOS QUE TRAE DENTRO-->
+                <input style="width:100%;" onclick="insertarglobal('Clientes',['DUI','NIT','direccion','nombre','telefono']);" class="btn btn-success" type="button" value="AGREGAR">
+                <input style="width:100%;" onclick="mostrar('tablezone');" class="btn btn-warning adm" type="button" value="CONSULTAR"><!-- LA FUNCION PARA ABRIR LOS DATOS CONSULTADOS-->
+                <!-- ########################################### en el boton mostrar se pone en class al final adm que es para que si solo es admin pueda verlo
                 <div class="author">
                   <a href="#">
                     <img class="avatar border-gray" src="../assets/img/mike.jpg" alt="...">
@@ -211,57 +245,62 @@
                 </p>-->
               </div>
               <hr>
-              <!--
-              <div class="button-container">
-                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                  <i class="fab fa-facebook-f"></i>
-                </button>
-                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                  <i class="fab fa-twitter"></i>
-                </button>
-                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                  <i class="fab fa-google-plus-g"></i>
-                </button>
-              </div>
-            -->
+       
             </div>
             <!-- Y ACA TERMINARIAN ------------------------>
           </div>
         </div>
         <!-- ACA VIENE LA TABLA DONDE SE MOSTRARAN LOS DATOS (se puede dejar el row con style="Display:none" para que no aparezca y al darle a mostrar que aparezca.)  -->
-        <div id="tablezone" style="display:none;" class="row">
+        <div id="tablezone" style="display:none;" class="row"><!-- EL ID PARA LA TABLA PARA QUE PUEDA ABRIRSE DESPUES ADEMAS DE LA PROPIEDAD display none PARA QUE ESTE OCULTA-->
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title">Consulta de Proveedores</h5>
+                    <h5 class="title">Consulta de Clientes</h5>
                   </div>
                 <div class="card-body" id="datatable">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>
-                                <th>Detalles</th>
-                                <th>Nombre</th>
-                                <th>Telefono</th>
-                                <th>Acciones</th>
+                                <th class="text-center">DUi</th>
+                                <th class="text-center">NIT</th>
+                                <th class="text-center">Direccion</th>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Telefono</th>
+                                <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody id="datos">
-                          
+                        <tbody id="datos"><!-- SE DEJAN POR DEFAULT EL TBODY VACIO Y ADEMAS SE LE PONE EL ID DATOS PARA QUE ASI SE AÑADAN DATOS A EL-->
+                        
                         </tbody>
                     </table>
                 </div>
               </div>
         </div>
-        <!--FIN DE LA TABLA DE DATOS-->
+          </div>
+        </div>
       </div>
+      <div id="editar"><!-- ACA VA ESTE DIV SIEMPRE ANTES DEL FOOTER Y ES DONDE SE ALMACENA EL MODAL TEMPORAL CUANDO SE DA EDITAR -->
+
+      </div>
+      <footer class="footer">
+        <div class="container-fluid">
+          <nav>
+          </nav>
+          <div class="copyright" id="copyright">
+            &copy;
+            <script>
+              document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
+            </script>, Designed by
+            <a href="" target="_blank">FRAFS</a>.
+          </div>
+        </div>
+      </footer>
     </div>
   </div>
-  <div id="editar">
-    
-  </div>
-  <!--   necesarios para trabajar con la base de datos   -->
-  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase.js"></script>
-  <script src="assets/js/funciones.js"></script> 
+  <!-- Y COMO SIEMPRE LAS IMPORTACIONES DE LOS JS NECESARIOS.-->
+   <!--   necesarios para trabajar con la base de datos   -->
+   <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase.js"></script>
+   <script src="assets/js/funciones.js"></script> 
   <!--   Core JS Files   -->
   <script src="assets/js/core/jquery.min.js"></script>
   <script src="assets/js/core/popper.min.js"></script>
