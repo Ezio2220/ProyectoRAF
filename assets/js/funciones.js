@@ -293,7 +293,27 @@ function update(tbl,id){
         detax = document.getElementById("d5"+j).options.selectedIndex;
         det+= document.getElementById("d5"+j).options.item(detax).text;
         //alert(detax+" "+document.getElementById("d"+j).options.item(detax).text);
-        det+=" : $"+obtener("s5"+j);
+        det+=" *"+obtener("c5"+j)+" : $"+obtener("s5"+j);
+        det+=";";
+      }
+      obj["detalle"]=det;
+      obj["fecha"]=obtener("fecha1");
+      obj["tipopago"]=obtener("tipopago1");
+      obj["total"]=obtener("total1");
+      obj["vendedor"]=obtener("vendedor1");
+      break;
+    }
+    case "Fotos":{
+      var obj = new Object;
+      obj["cliente"]=obtener("cliente1");
+      var n = document.getElementById("dettable1").rows.length;
+      var det = "";      var detax ;
+      for(var j =1;j<n;j++){
+        console.log("producto N 5"+j);
+        detax = document.getElementById("d5"+j).options.selectedIndex;
+        det+= document.getElementById("d5"+j).options.item(detax).text;
+        //alert(detax+" "+document.getElementById("d"+j).options.item(detax).text);
+        det+=" *"+obtener("c5"+j)+" : $"+obtener("s5"+j);
         det+=";";
       }
       obj["detalle"]=det;
@@ -321,7 +341,7 @@ function modaledit(tbl,id){
 "    <div class='modal-content'>"+
 "      <div class='modal-header'>"+
 "        <h5 class='modal-title' id='Edt"+id+"Label'>Editar "+tbl+"</h5>";
-if(tbl=="Ventas"){
+if(tbl=="Ventas" || tbl=="Foto"){
   modal+=
 "        <button type='button' onclick='location.reload();' class='close' data-dismiss='modal' aria-label='Close'>"+
 "          <span aria-hidden='true'>&times;</span>"+
@@ -589,12 +609,77 @@ switch(tbl){
     break;
   }
   case "Foto":{
-
+    data="<form>"+
+    "  <div class='row'>"+
+    "    <div class='col-md-4 pl-1'>"+
+    "      <div class='form-group'>"+
+    "        <label for='exampleInputEmail1'>Fecha</label>"+
+    "        <input id='fecha1' type='date' class='form-control' placeholder='3 Nov 2019'>"+
+    "      </div>"+
+    "    </div>"+
+    "    <div class='col'>"+
+    "          <input onclick='agregardetalle(1,1);' id='add1' style='margin-left: 40%;' type='button' class='btn btn-success' value='Agregar otro producto'>"+
+    "      </div>"+
+    "  </div>"+
+    "  <div class='row'>"+
+    "    <div class='col'>"+
+    "      <div class='form-group'>"+
+     "       <label>Detalle</label>"+
+     "       <table id='dettable1' class='table'>"+
+     "           <thead>"+
+     "               <tr>"+
+     "                   <th class='text-center'>Paquete</th>"+
+     "                   <th class='text-center'>Cantidad</th>"+
+     "                   <th class='text-center'>Precio</th>"+
+     "                   <th class='text-center'>Subtotal</th>"+
+     "               </tr>"+
+     "           </thead>"+
+     "           <tbody id='detdata1'>"+
+    "                <tr>"+
+     "                 <td><select onchange='selector(this.id,1,1);' aria-placeholder='seleccione los productos de la venta' class='form-control' onmouseover=\"cargardatos(this.id,'Foto','nombre',0,0,1);\" name='detalle' id='d51'>"+
+     "                   </select>"+
+     "                 </td>"+
+     "                 <td>"+
+     "                   <input onchange='selector(this.id,1,1);' class='form-control' value='1' id='c51' type='number' min='1'>"+
+     "                 </td>"+
+     "                 <td>"+
+     "                     <input class='form-control' id='p51' readonly type='number' placeholder='$' >"+
+     "                 </td>"+
+     "                 <td>"+
+     "                     <input class='form-control' id='s51' readonly type='number' placeholder='$' >"+
+     "                 </td>"+
+     "               </tr>"+
+     "           </tbody>"+
+     "       </table>"+
+     "     </div>"+
+     "   </div>"+
+     " </div>"+
+     " <div class='row'>"+
+        "<div class='col-md-12'>"+
+          "<div class='form-group'>"+
+            "<label>Total</label>"+
+            "<input id='total1' readonly type='number' class='form-control' placeholder='$' value=''>"+
+          "</div>"+
+          "<div class='form-group'>"+
+            "<label>Tipo De Pago</label>"+
+            "<input id='tipopago1' type='text' class='form-control' placeholder='Efectivo' value=''>"+
+          "</div>"+
+        "</div>"+
+      "</div>"+
+      "<div class='form-group'>"+
+          "<label>Cliente</label>"+
+          "<select onmouseover=\"cargardatos(this.id,'Clientes','nombre',0,0);\" class='form-control'  name='cliente' id='cliente1'></select>"+
+      "</div>"+
+      "<div class='form-group'>"+
+          "<label>Vendedor</label>"+
+          "<select onmouseover=\"cargardatos(this.id,'Vendedores','nombre',0,0);\" class='form-control'  name='vendedor' id='vendedor1'></select>"+
+      "</div>"+
+    "</form>:";
     break;
   }
 }
 modal+=data;
-if(tbl=="Ventas"){
+if(tbl=="Ventas" || tbl=="Foto"){
   modal+=
   "        <br>"+
 "      </div>"+
