@@ -20,7 +20,14 @@ function mostrar(id){
 }
 //------------------------------------------------insertar  a cualquier tabla
 function insertarglobal(tbl,arreglo,v=0){
-var base = firebase.database().ref(tbl);
+  var base;
+  if(tbl=="paquete"){
+    base = firebase.database().ref("Productos");
+  }else{
+    base = firebase.database().ref(tbl);
+  }
+
+
 var obj = new Object;
 console.log("insertando");
 for(var i=0;i<arreglo.length;i++){
@@ -48,9 +55,21 @@ for(var i=0;i<arreglo.length;i++){
 base.once("value",function(snap){
  var aux = snap.val();
   var n = 1;
-  id=tbl.substring(0,4);
+  if(tbl=="paquete"){
+    id="Paqu";
+  }else{
+      id=tbl.substring(0,4);
+  }
+
   for(var documento in aux){ 
-    n++;
+    if(tbl=="paquete"){
+      if(documento.substring(0,4)=="Paqu"){
+        n++;
+      }
+    }else{
+      n++;
+    }
+    
 }
 if(n>=10000){
   id+="0"+n;
@@ -173,7 +192,13 @@ function filltablav2(arreglo,tp,id,tbl,n = 0,user=0){
 
 //----------------------------------------------ACTUALIZAR
 function update(tbl,id){
-  var base=  firebase.database().ref(tbl+"/"+id);
+  var base;
+  if(tbl=="paquete"){
+    base=  firebase.database().ref("Productos/"+id);
+  }else{
+    base=  firebase.database().ref(tbl+"/"+id);
+  }
+  
 
   switch(tbl){
     case "Usuarios":{
@@ -197,6 +222,13 @@ function update(tbl,id){
       var obj = new Object;                   //aqui es solo de poner las cosas en el orden que estan en la bd
       obj["cantidad"]=obtener("cantidad1");     //y luego obtenerlas del modal el modal tiene los mismos nombres
       obj["marca"]=obtener("marca1");                 //que los campos a agregar solo que con un 1 al final
+      obj["nombre"]=obtener("nombre1");
+      obj["precio"]=obtener("precio1");
+      break;
+    }
+    case "paquete":{
+      var obj = new Object;                   
+      obj["detalle"]=obtener("detalle1");                 
       obj["nombre"]=obtener("nombre1");
       obj["precio"]=obtener("precio1");
       break;
@@ -235,14 +267,7 @@ function update(tbl,id){
 
 }
 function modaledit(tbl,id){
-/*
-  var usuarios = ['text','text','text','hidden'];
-  var vendedores = ["text","text","text","text","text"];
-  var productos =["text","text","number","number"];
-  var proveedores=["text","text","number"];
-  var ventas = ["date","text","text","text","text","number","number"]  ;
-  var clientes= ["text","text","number","text","text"];
-*/
+
   var modal = 
  " <div class='modal fade' id='Edt"+id+"' tabindex='-1' role='dialog' aria-labelledby='Edt"+id+"Label' aria-hidden='true'>"+
  " <div class='modal-dialog' role='document'>"+
@@ -458,6 +483,31 @@ switch(tbl){
                 "</form>";
     break;
   }
+  case "paquete":{
+    data = "                <form>"+
+    "<div class='row'>"+
+      "<div class='col-md-6'>"+
+        "<div class='form-group'>"+
+          "<label>Nombre</label>"+
+          "<input id='nombre1'  type='text' class='form-control' placeholder='graduacion' value=''><!-- CADA INPUT debe tener un id que haga referencia al nombre de dato, este nombre de id debe ser igual del que tendra el dato en la bd-->"+
+        "</div>"+
+      "</div>"+
+      "<div class='col-md-6'>"+
+        "<div class='form-group'>"+
+          "<label for='detalle'>Detalle</label>"+
+          "<input id='detalle1'  type='text' class='form-control' placeholder='2 fotos tamaño cedula, 2 cuadros tamaño 30x50'>"+
+        "</div>"+
+      "</div>"+
+      "<div class='col-md-6'>"+
+        "<div class='form-group'>"+
+          "<label>Precio</label>"+
+          "<input id='precio1' type='number' class='form-control' placeholder='$' value=''>"+
+        "</div>"+
+    "</div>"+
+  "</div>"+
+  "</form>";
+    break;
+  }
 }
 modal+=data;
 modal+=
@@ -477,7 +527,13 @@ fillparte("editar",modal);
 }
 //------------------------------------------------ELIMINAR
 function borrar(tbl,id){
-  var base = firebase.database().ref(tbl+"/"+id);
+  var base;
+  if(tbl=="paquete"){
+    base = firebase.database().ref("Productos/"+id);
+  }else{
+    base = firebase.database().ref(tbl+"/"+id);
+  }
+
  var mensaje = "elemento con el id: <b> "+id+" </b> ha sido <b>ELIMINADO</b>"; 
  base.remove();
   nowuiDashboard.showNotification('top','center',mensaje,"danger");
@@ -505,42 +561,78 @@ function consultar(){   ///funcion para consultar datos
     fillparte("datos",tabla);//finalmente se inserta en el html con la funcion creada
   });
 }
-//---------------------------------------------------consultar de cualquier tabla menos usuarios.
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+//------------------------------------------------------------------------------------------consultar de cualquier tabla menos usuarios.
 function consultarglobal(tbl,id,num = false){
 //tbl el nombre de la tabla que se tomara, id 1 si quiere mostrar el id en la consulta 0 si no quiere mostrarlo en la consulta.
-var db = firebase.database().ref(tbl); //se crea instancia de la base datos centrandonos en usuarios
+var db;
+if(tbl=="paquete"){
+  db = firebase.database().ref("Productos");
+}else{
+  db = firebase.database().ref(tbl); //se crea instancia de la base datos centrandonos en usuarios
+}
+
 db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
   var aux = snap.val(); //se crea un auxiliar que tomara los datos de ese snap
   var tabla = "";   //se crea la variable donde se guardara la tabla entera
   var tmp,tmpax;
   var cont=0;
   for(var documento in aux){  //se hace un for por cada id dentro de usuarios osea por cada usuario
-    cont++;
-    tmp =Object.values(aux[documento]); 
-    tmpax = tmp;
-    if(id){
-      tmpax.push(documento);
-    }
-    for(var i=0;i<tmpax.length;i++){//para reordenar las cosas
-     if(id){
-       if(i==0){
-         tmp[0]=documento;
-       }else{
-         tmp[i]=tmpax[i-1];
-       }
-     }else{
-       tmp[i]=tmpax[i];
-     }
-    }
-    console.log(tmp);
-   /*  tabla+= filltabla(documento,aux[documento].Nombre, //a la variable tabla se agregara cada vez el id (Documento) seguido de sus demas elementos de cada id (usuario) existente en Usuarios
-      aux[documento].pass,aux[documento].tipo);*/
-      if(num){
-        tabla += filltablav2(tmp,1,documento,tbl,cont);
-      }else{
-         tabla += filltablav2(tmp,1,documento,tbl);
+    if(tbl=="paquete"){
+      if(documento.substring(0,4)=="Paqu"){
+        cont++;
+        tmp =Object.values(aux[documento]); 
+        tmpax = tmp;
+        if(id){
+          tmpax.push(documento);
+        }
+        for(var i=0;i<tmpax.length;i++){//para reordenar las cosas
+         if(id){
+           if(i==0){
+             tmp[0]=documento;
+           }else{
+             tmp[i]=tmpax[i-1];
+           }
+         }else{
+           tmp[i]=tmpax[i];
+         }
+        }
+        console.log(tmp);
+
+           if(num){
+             tabla += filltablav2(tmp,1,documento,tbl,cont);
+           }else{
+              tabla += filltablav2(tmp,1,documento,tbl);
+           }
       }
-     
+    }else{
+      cont++;
+      tmp =Object.values(aux[documento]); 
+      tmpax = tmp;
+      if(id){
+        tmpax.push(documento);
+      }
+      for(var i=0;i<tmpax.length;i++){//para reordenar las cosas
+       if(id){
+         if(i==0){
+           tmp[0]=documento;
+         }else{
+           tmp[i]=tmpax[i-1];
+         }
+       }else{
+         tmp[i]=tmpax[i];
+       }
+      }
+      console.log(tmp);
+      /*  tabla+= filltabla(documento,aux[documento].Nombre, //a la variable tabla se agregara cada vez el id (Documento) seguido de sus demas elementos de cada id (usuario) existente en Usuarios
+         aux[documento].pass,aux[documento].tipo);*/
+         if(num){
+           tabla += filltablav2(tmp,1,documento,tbl,cont);
+         }else{
+            tabla += filltablav2(tmp,1,documento,tbl);
+         }
+
+    } 
   }
   fillparte("datos",tabla);//finalmente se inserta en el html con la funcion creada
 });

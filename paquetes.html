@@ -20,7 +20,7 @@
   <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 <!-- conultar global lo unico que cambiaras es el nombre de la tabla de la que tomara los datos lo demas dejalo igual que aca-->
-<body onload="comprobar();//consultarglobal('Clientes',0,1);" class=""> <!--#########################3 lo mismo del comprobar antes de consultar en onload.-->
+<body onload="comprobar();consultarglobal('paquete',0,1);" class=""> <!--#########################3 lo mismo del comprobar antes de consultar en onload.-->
   <div id="todo" hidden class="wrapper ">  <!-- #################################se le pone hidden y el id todo para que si alguien intenta entrar sin logearse lo devuelva y no le muestre nada-->
     <div class="sidebar" data-color="orange">
       <!--
@@ -198,9 +198,6 @@
                       </div>
                   </div>
                 </div>
-                    
-                    
-                    
                 </form>
               </div>
             </div>
@@ -213,7 +210,7 @@
               </div>
               <div class="card-body">
                 <!--aca va LO DEL BOTON INSETAR LA FUNCION INSERTAR GLOBAL ES DE MAS DECIRTE QUE LO PRIMERO ES EL NOMBRE DE LA TABLA DE LA BASE DE DATOS Y LO DEMAS ES UN ARREGLO DEL NOMBRE DE LOS DATOS QUE TRAE DENTRO-->
-                <input style="width:100%;" onclick="insertarglobal('Clientes',['DUI','NIT','direccion','nombre','telefono']);" class="btn btn-success" type="button" value="AGREGAR">
+                <input style="width:100%;" onclick="insertarglobal('paquete',['detalle','nombre','precio']);" class="btn btn-success" type="button" value="AGREGAR">
                 <input style="width:100%;" onclick="mostrar('tablezone');" class="btn btn-warning adm" type="button" value="CONSULTAR"><!-- LA FUNCION PARA ABRIR LOS DATOS CONSULTADOS-->
                 <!-- ########################################### en el boton mostrar se pone en class al final adm que es para que si solo es admin pueda verlo
                 <div class="author">
@@ -248,10 +245,10 @@
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>
-                                <th class="text-center">nombre</th>
                                 <th class="text-center">Detalle</th>
-                                <th class="text-center">Cantidad</th>
+                                <th class="text-center">Nombre</th>
                                 <th class="text-center">Precio</th>
+                                <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="datos"><!-- SE DEJAN POR DEFAULT EL TBODY VACIO Y ADEMAS SE LE PONE EL ID DATOS PARA QUE ASI SE AÑADAN DATOS A EL-->
