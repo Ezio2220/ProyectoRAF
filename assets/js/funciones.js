@@ -18,13 +18,20 @@ function obtener(id){
 function mostrar(id){
   document.getElementById(id).style.display= "block";
 }
+//##################################################################################################################################################################
 //------------------------------------------------insertar  a cualquier tabla
 function insertarglobal(tbl,arreglo,v=0){
   var base;
+
   if(tbl=="paquete"){
     base = firebase.database().ref("Productos");
   }else{
-    base = firebase.database().ref(tbl);
+    if(tbl=="Foto"){
+      base = firebase.database().ref("Ventas");
+    }else{
+      base = firebase.database().ref(tbl);
+    }
+    
   }
 
 
@@ -58,7 +65,12 @@ base.once("value",function(snap){
   if(tbl=="paquete"){
     id="Paqu";
   }else{
+    if(tbl=="Foto"){
+      id="Foto";
+    }else{
       id=tbl.substring(0,4);
+    }
+      
   }
 
   for(var documento in aux){ 
@@ -67,7 +79,13 @@ base.once("value",function(snap){
         n++;
       }
     }else{
-      n++;
+      if(tbl=="Foto"){
+        if(documento.substring(0,4)=="Foto"){
+          n++;
+        }
+      }else{
+        n++;
+      }
     }
     
 }
@@ -565,11 +583,20 @@ function consultar(){   ///funcion para consultar datos
 //------------------------------------------------------------------------------------------consultar de cualquier tabla menos usuarios.
 function consultarglobal(tbl,id,num = false){
 //tbl el nombre de la tabla que se tomara, id 1 si quiere mostrar el id en la consulta 0 si no quiere mostrarlo en la consulta.
+console.log("ACA no hay nada");
 var db;
 if(tbl=="paquete"){
   db = firebase.database().ref("Productos");
 }else{
-  db = firebase.database().ref(tbl); //se crea instancia de la base datos centrandonos en usuarios
+  console.log("algo aunksea3");
+  if(tbl=="Foto"){
+    console.log("algo aunksea2");
+    db = firebase.database().ref("Ventas"); 
+    //console.log("algo aunksea22");
+  }else{
+    db = firebase.database().ref(tbl); //se crea instancia de la base datos centrandonos en usuarios
+  }
+  
 }
 
 db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
@@ -578,6 +605,7 @@ db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
   var tmp,tmpax;
   var cont=0;
   for(var documento in aux){  //se hace un for por cada id dentro de usuarios osea por cada usuario
+    console.log("--"+documento);
     if(tbl=="paquete"){
       if(documento.substring(0,4)=="Paqu"){
         cont++;
@@ -606,7 +634,11 @@ db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
            }
       }
     }else{
-      cont++;
+      
+      if(tbl=="Foto"){
+        console.log("algo aunksea");
+        if(documento.substring(0,4)=="Foto"){
+          cont++;
       tmp =Object.values(aux[documento]); 
       tmpax = tmp;
       if(id){
@@ -631,6 +663,35 @@ db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
          }else{
             tabla += filltablav2(tmp,1,documento,tbl);
          }
+        }
+      }else{
+        cont++;
+      tmp =Object.values(aux[documento]); 
+      tmpax = tmp;
+      if(id){
+        tmpax.push(documento);
+      }
+      for(var i=0;i<tmpax.length;i++){//para reordenar las cosas
+       if(id){
+         if(i==0){
+           tmp[0]=documento;
+         }else{
+           tmp[i]=tmpax[i-1];
+         }
+       }else{
+         tmp[i]=tmpax[i];
+       }
+      }
+      console.log(tmp);
+      /*  tabla+= filltabla(documento,aux[documento].Nombre, //a la variable tabla se agregara cada vez el id (Documento) seguido de sus demas elementos de cada id (usuario) existente en Usuarios
+         aux[documento].pass,aux[documento].tipo);*/
+         if(num){
+           tabla += filltablav2(tmp,1,documento,tbl,cont);
+         }else{
+            tabla += filltablav2(tmp,1,documento,tbl);
+         }
+      }
+      
 
     } 
   }
@@ -639,6 +700,7 @@ db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
 }
 //---------------------------------------------------------funcion para consultar desde una lista desplegable
 function cargardatos(id,tbl,campo,multiple=0,vend=0,v=0){
+  
 var lista = document.getElementById(id);
 console.log(lista.length);
 if(lista.length>0){
@@ -653,7 +715,13 @@ console.log("ya se cargaron");
 var data ;
 var c;
 var camp;
-var db = firebase.database().ref(tbl); 
+var db ;
+if(tbl=="Foto"){
+  db= firebase.database().ref("Productos"); 
+}else{
+  db= firebase.database().ref(tbl); 
+}
+
 
 db.once("value",function(snap){ 
   var aux = snap.val(); 
@@ -692,8 +760,22 @@ db.once("value",function(snap){
       });
   }else{
   for(var documento in aux){
-    
-    data= document.createElement("option");  
+    if(tbl=="Foto"){
+      if(documento.substring(0,4)=="Paqu"){
+        data= document.createElement("option");  
+        c = aux[documento];
+        camp = c[campo];
+        data.text=camp;
+        data.value=documento;
+        if(v>0){
+          console.log("es una venta");
+          data.text = "Paquete "+ camp;
+        }
+        lista.add(data);
+        console.log(camp);
+      }
+    }else{
+      data= document.createElement("option");  
     c = aux[documento];
     camp = c[campo];
     data.text=camp;
@@ -712,7 +794,7 @@ db.once("value",function(snap){
     }
     lista.add(data);
     console.log(camp);
-    
+    }
 
   }
 }
@@ -721,7 +803,7 @@ db.once("value",function(snap){
 
 }
 //-----------------------------------------------------------------aux ventas
-function selector(id){
+function selector(id,Foto=0){
 var n =  parseInt(id.substring(1));
 var pro = obtener("d"+n);
 console.log(pro);
@@ -733,14 +815,20 @@ db.once("value",function(snap){
     console.log("casi");
     var ax = snap.val();
     console.log(ax);
-    cant.max = ax["cantidad"];
-    if(id.substring(0,1)!='c'){
-      cant.value=1;
+    if(Foto==1){
+      cant.max = 10;
     }else{
-      if(cant.value>cant.max){
-        cant.value=cant.max;
+      cant.max = ax["cantidad"];
+      if(id.substring(0,1)!='c'){
+        cant.value=1;
+      }else{
+        if(cant.value>cant.max){
+          cant.value=cant.max;
+        }
       }
     }
+    
+    
     pre.value = parseFloat(ax["precio"]);
     sub.value = parseInt(cant.value) * parseFloat(pre.value);
     console.log("Se calculo");
@@ -748,12 +836,18 @@ db.once("value",function(snap){
 });
 
 }
-function agregardetalle(){
+function agregardetalle(Foto=0){
   var tabla = document.getElementById("dettable");
   var n = tabla.rows.length;
   var content = document.getElementById("detdata");
   var add = "<tr>"+
-  "<td><select onchange='selector(this.id);' aria-placeholder='seleccione los productos de la venta' class='form-control' onmouseover=\"cargardatos(this.id,'Productos','nombre',0,0,1);\" name='detalle' id='d"+n+"'>"+
+  "<td><select onchange='selector(this.id);' aria-placeholder='seleccione los productos de la venta' class='form-control' onmouseover=\"cargardatos(this.id, ";
+  if(Foto==1){
+    add+= "'Foto'";
+  }else{
+    add+= "'Productos'";
+  }
+  add+=  ",'nombre',0,0,1);\" name='detalle' id='d"+n+"'>"+
 "    </select>"+
   "</td>"+
   "<td>"+
