@@ -144,7 +144,7 @@
                 <h5 class="title">Ventas</h5>
               </div>
               <div class="card-body">
-                <form>
+                <form id="datosdeventa">
                   <div class="row">
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
@@ -226,7 +226,7 @@
               <div class="card-body" style="min-height: max-content;">
                 <input style="width:100%;" onclick="insertarglobal('Ventas',['cliente','detalle','fecha','tipopago','total','vendedor'],1);" class="btn btn-success" type="button" value="AGREGAR">
                 <input style="width:100%;" onclick="mostrar('tablezone');" class="btn btn-warning adm" type="button" value="CONSULTAR">
-       
+                <!--input style="width:100%;" onclick="imp('Vend000001',1);" class="btn btn-warning adm" type="button" value="Mostrar Factura"-->
               </div>
               <hr>
               
@@ -256,7 +256,7 @@
                     <h5 class="title">Consulta de Ventas</h5>
                   </div>
                 <div class="card-body" id="datatable">
-                    <table class="table">
+                    <table id="tbldatos" class="table">
                         <thead>
                             <tr>
                                 <th class="text-center">N° De Factura</th>

@@ -154,6 +154,11 @@ else{
 base.child(id).set(obj);
 nowuiDashboard.showNotification('top','center',"<b>REGISTRO EXITOSO!</b>","success");
 setTimeout(function(){location.reload()},3000);
+if(tbl=="Ventas"){
+  imp(id,1);
+}else if(tbl=="Foto"){
+  imp(id,1,1);
+}
 });
 
 }
@@ -1181,6 +1186,80 @@ function total(edt=0){
   }
   
 }
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+//-----------------------------------------------------------------------------IMPRIMIR
+function imp(id="datatable",f=0,foto=0){
+  var titulo;
+  if(f){
+    titulo = "<h1 class='text-center'> RAF, SA de CV </h1><br><h3 class='text-center'>SUCURSAL METROCENTRO SAN MIGUEL</h3><br>"
+    var numerofactura = id.substring(4);
+    var fecha=obtener("fecha");
+    var total=obtener("total");
+    var vendedor="<b>";
+    var cliente="<b>";
+    
+    var detalle = "<table class='table'><thead ><tr><th style:'width: 60%;' class='text-left'>";
+    if(foto){
+      titulo+="<h4>Estudio de Fotografia</h4>";
+      detalle+="Paquete de Fotografia";
+    }else{
+      titulo+="<h4>Venta de Articulos Electronicos y Accesorios</h4>";
+      detalle+="Articulo";
+    }
+    
+    detalle+="</th><th style:'width: 10%;' class='text-center'>Cantidad</th><th style:'width: 15%;' class='text-center'>Tarifa</th><th style:'width: 15%;' class='text-right'>Subtotal</th></tr> </thead><tbody>";
+    var n = document.getElementById("dettable").rows.length;
+    var det = "";
+    var detax ;
+    for(var j =1;j<n;j++){
+      console.log("producto N "+j);
+      detalle+="<tr><td class='text-left'>";
+      detax = document.getElementById("d"+j).options.selectedIndex;
+      det= document.getElementById("d"+j).options.item(detax).text;
+      detalle+=det+"</td><td class='text-center'>"+obtener("c"+j)+"</td>";
+      detalle+="<td class='text-center'>$"+obtener("p"+j)+"</td>";
+      detalle+="<td class='text-right'>$"+obtener("s"+j)+"</td>";
+    }
+    detax = document.getElementById("vendedor").options.selectedIndex;
+    vendedor += document.getElementById("vendedor").options.item(detax).text+"</b>";
+    detax = document.getElementById("cliente").options.selectedIndex;
+    cliente += document.getElementById("cliente").options.item(detax).text+"</b>";
+    detalle+=" </tbody><tfoot><tr><td></td><td></td><td class='text-center'><b>TOTAL:</b></td><td class='text-right'><b>$"+total+"</b></td></tr> </tfoot></table>"
+    var ordenar = "<table class='table'><thead> <tr> <th>Cajero</th> <th>Cliente</th> </tr> </thead><tbody>";
+    ordenar+="<tr><td class='text-center'>"+vendedor+"</td>";
+    ordenar+="<td class='text-center'>"+cliente+"</td>";
+    ordenar+="</tbody></table>";
+  }
+  var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+  mywindow.document.write('<html><head>');
+mywindow.document.write("  <script src='assets/js/funciones.js'></script> <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700,200' rel='stylesheet' /> <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.1/css/all.css' integrity='sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr' crossorigin='anonymous'> <link href='assets/demo/demo.css' rel='stylesheet' /> <link href='assets/css/bootstrap.min.css' rel='stylesheet' /> <link href='assets/css/now-ui-dashboard.css?v=1.3.0' rel='stylesheet' />");
+  mywindow.document.write("</head><body onload='pr(window);'> <div class='wrapper'>");
+  if(f){
+    mywindow.document.write(fecha+"<div style='text-align:right;'><b>"+"FACTURA N°: "+numerofactura+"</b></div><br>"+titulo);
+    mywindow.document.write("<br> "+ordenar);
+    mywindow.document.write("<br>"+detalle);
+   // mywindow.document.write("<footer class='footer'>Total a Pagar: $"+total);
+    
+  }else{
+    mywindow.document.write(document.getElementById(id).innerHTML);
+  }
+  
+  mywindow.document.write('</div></body></html>');
+  mywindow.document.close(); // necesario para IE >= 10
+  mywindow.focus(); // necesario para IE >= 10
+ // 
+  //mywindow.print();
+ // mywindow.close();
+  
+  //return true;
+}
+
+function pr(ll){
+  ll.print();
+  ll.close();
+}
+
+
 //----------------------------------------------------------------------------SESIONES--------------------------------------
 const clave = window.localStorage;
 //"D:/works/0/2019/TSI/ProyectoRAF/";
