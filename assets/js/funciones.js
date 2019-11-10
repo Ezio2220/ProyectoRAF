@@ -386,7 +386,7 @@ function modaledit(tbl,id){
 "    <div class='modal-content'>"+
 "      <div class='modal-header'>"+
 "        <h5 class='modal-title' id='Edt"+id+"Label'>Editar "+tbl+"</h5>";
-if(tbl=="Ventas" || tbl=="Foto"){
+if(tbl=="Ventas" || tbl=="Foto" || tbl=="Proveedores"){
   modal+=
 "        <button type='button' onclick='location.reload();' class='close' data-dismiss='modal' aria-label='Close'>"+
 "          <span aria-hidden='true'>&times;</span>"+
@@ -482,13 +482,13 @@ switch(tbl){
                     "<div class='col-md-6 pr-1'>"+
                       "<div class='form-group'>"+
                         "<label>Cantidad</label>"+
-                        "<input id='cantidad1' type='text' class='form-control' placeholder='10' value=''>"+
+                        "<input id='cantidad1' type='number' class='form-control' placeholder='10' value=''>"+
                       "</div>"+
                     "</div>"+
                     "<div class='col-md-6 pr-1'>"+
                       "<div class='form-group'>"+
                         "<label>Precio</label>"+
-                        "<input id='precio1' type='text' class='form-control' placeholder='$10' value=''>"+
+                        "<input id='precio1' type='number' class='form-control' placeholder='$10' value=''>"+
                       "</div>"+
                     "</div>"+
                   "</div>"+
@@ -537,26 +537,17 @@ switch(tbl){
     break;
   }
   case "Proveedores":{
-             data="<form>"+
-                  "<div class='row'>"+
-                    "<div class='col-md-3 px-1'>"+
-                      "<div class='form-group'>"+
-                        "<label>Nombre</label>"+
-                        "<input id='nombre1' type='text' class='form-control' placeholder='Impresora' value=''>"+
-                      "</div>"+
-                    "</div>"+
-                    "<div class='col-md-4 pl-1'>"+
-                      "<div class='form-group'>"+
-                        "<label for='exampleInputEmail1'>Detalles</label>"+
-                        "<input id='detalle1' type='email' class='form-control' placeholder='Cannon'>"+
-                      "</div>"+
-                      "<div class='form-group'>"+
-                        "<label for='exampleInputEmail1'>Telefono</label>"+
-                        "<input id='telefono1' type='email' class='form-control' placeholder='78748400'>"+
-                      "</div>"+
-                    "</div>"+
-                  "</div>"+
-                "</form>";
+             data="<form><div class='row'><div class='col-md-3 px-1'>"+
+"<div class='form-group'> <label>Nombre</label>"+
+"<input id='nombre1' type='text' class='form-control' placeholder='Impresora' value=''>"+
+"</div></div><div class='col-md-6 pl-1'><div class='form-group'>"+
+"<label for='exampleInputEmail1'>Detalles</label>"+
+"<select onmouseover=\"cargardatos(this.id,'Productos','nombre',1,0);\" class='form-control'  name='proveedor' id='detalle1'></select>"+
+"</div> </div><div class='col-md-3 px-1'><div class='form-group'>"+
+"<label for='exampleInputEmail1'>Telefono</label>"+
+"<input id='telefono1' type='email' class='form-control' placeholder='78748400'>"+
+"</div></div> </div></form>";
+
     break;
   }
   case "Ventas":{
@@ -724,7 +715,7 @@ switch(tbl){
   }
 }
 modal+=data;
-if(tbl=="Ventas" || tbl=="Foto"){
+if(tbl=="Ventas" || tbl=="Foto" || tbl=="Proveedores"){
   modal+=
   "        <br>"+
 "      </div>"+
