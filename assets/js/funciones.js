@@ -53,7 +53,13 @@ function insertarglobal(tbl,arreglo,v=0){
     }
     
   }
-
+var vacio=false;
+for(var k=0;k<arreglo.length;k++){
+  if(obtener(arreglo[k]).length==0 ){
+    vacio=true;
+    return  nowuiDashboard.showNotification('top','center',"<b>rellene todos los campos!</b>","warning");
+  }
+}
 
 var obj = new Object;
 console.log("insertando");
