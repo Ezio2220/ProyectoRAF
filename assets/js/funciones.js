@@ -204,7 +204,7 @@ function insertardatos(n1,n2,n3){
           }
           //verificamos si dentro de la fotografia (aux) en el id que estamos viendo ahorita (documento) su parte del nombre es igual a la del elemento que vamos a insertar
           if(aux[documento].Nombre==obj["Nombre"]){
-            console.log((aux[documento].Nombre+"--"+obj["Nombre"]);
+            console.log((aux[documento].Nombre+"--"+obj["Nombre"]));
             //si son iguales osea si ya hay un nombre igual al de elemento que pondremos 
             nowuiDashboard.showNotification('top','center',"<b>ESE USUARIO YA EXISTE!</b>","danger");
             return 0;//y se detendra la funcion
@@ -1264,7 +1264,7 @@ function pr(ll){
 //----------------------------------------------------------------------------SESIONES--------------------------------------
 const clave = window.localStorage;
 //"D:/works/0/2019/TSI/ProyectoRAF/";
-const base ="D:/works/0/2019/TSI/ProyectoRAF/";//"https://ezio2220.github.io/ProyectoRAF/";
+const base ="https://ezio2220.github.io/ProyectoRAF/";
 
 function salir(){
   console.log(clave.getItem('active'));
