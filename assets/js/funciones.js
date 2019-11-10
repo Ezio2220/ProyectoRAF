@@ -762,28 +762,36 @@ function borrar(tbl,id){
 }
 
 //---------------------------------------------consultar usuarios
-function consultar(){   ///funcion para consultar datos
+function consultar(buscar="none"){   ///funcion para consultar datos
+ document.getElementById("datos").innerHTML = " ";
   var db = firebase.database().ref("Usuarios"); //se crea instancia de la base datos centrandonos en usuarios
+  
+  if(buscar!="none" && obtener("criterio").length > 0){
+    db = db.orderByChild(buscar).equalTo(obtener("criterio"));
+  }
   db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap
     var aux = snap.val(); //se crea un auxiliar que tomara los datos de ese snap
     var tabla = "";   //se crea la variable donde se guardara la tabla entera
     var tmp;
     for(var documento in aux){  //se hace un for por cada id dentro de usuarios osea por cada usuario
-      tmp =Object.values(aux[documento]);
+      var dato = aux[documento];
+         tmp =Object.values(aux[documento]);
       tmp[0]= documento;
       console.log(tmp);
      /*  tabla+= filltabla(documento,aux[documento].Nombre, //a la variable tabla se agregara cada vez el id (Documento) seguido de sus demas elementos de cada id (usuario) existente en Usuarios
         aux[documento].pass,aux[documento].tipo);*/
         tabla += filltablav2(tmp,1,documento,"Usuarios",0,1);
+     
     }
     fillparte("datos",tabla);//finalmente se inserta en el html con la funcion creada
   });
 }
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 //------------------------------------------------------------------------------------------consultar de cualquier tabla menos usuarios.
-function consultarglobal(tbl,id,num = false){
+function consultarglobal(tbl,id,num = false,buscar="none"){
 //tbl el nombre de la tabla que se tomara, id 1 si quiere mostrar el id en la consulta 0 si no quiere mostrarlo en la consulta.
 console.log("ACA no hay nada");
+document.getElementById("datos").innerHTML = " ";
 var db;
 if(tbl=="paquete"){
   db = firebase.database().ref("Productos");
@@ -797,6 +805,9 @@ if(tbl=="paquete"){
     db = firebase.database().ref(tbl); //se crea instancia de la base datos centrandonos en usuarios
   }
   
+}
+if(buscar!="none" && obtener("criterio").length > 0){
+  db = db.orderByChild(buscar).equalTo(obtener("criterio"));
 }
 
 db.once("value",function(snap){ //se consulta usando .once y crendo funcion snap

@@ -193,7 +193,20 @@
         <div id="tablezone" style="display:none;" class="row">
             <div class="card">
                 <div class="card-header">
+                  <div class="row">
                     <h5 class="title">Consulta de Usuarios</h5>
+                    <form style="margin-left: auto;" >
+                      <div  class="input-group no-border">
+                        <input id="criterio" type="text" value="" class="form-control" placeholder="Buscar por nombre...">
+                        <div onclick="consultar('Nombre');" class="input-group-append">
+                          <div class="input-group-text">
+                            <i class="now-ui-icons ui-1_zoom-bold"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                    
                   </div>
                 <div class="card-body" id="datatable">
                     <table class="table">

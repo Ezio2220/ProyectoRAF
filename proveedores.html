@@ -197,19 +197,7 @@
                 </p>-->
               </div>
               <hr>
-              <!--
-              <div class="button-container">
-                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                  <i class="fab fa-facebook-f"></i>
-                </button>
-                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                  <i class="fab fa-twitter"></i>
-                </button>
-                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                  <i class="fab fa-google-plus-g"></i>
-                </button>
-              </div>
-            -->
+
             </div>
             <!-- Y ACA TERMINARIAN ------------------------>
           </div>
@@ -218,7 +206,20 @@
         <div id="tablezone" style="display:none;" class="row">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title">Consulta de Proveedores</h5>
+                    <div class="row">
+                      <h5 class="title">Consulta de Proveedores</h5>
+                      <form style="margin-left: auto;" >
+                          <div class="input-group no-border">
+                            <input id="criterio" type="text" value="" class="form-control" placeholder="Buscar por nombre...">
+                            <div onclick="consultarglobal('Proveedores',0,1,'nombre');" class="input-group-append">
+                              <div class="input-group-text">
+                                <i class="now-ui-icons ui-1_zoom-bold"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                    </div>
+                    
                   </div>
                 <div class="card-body" id="datatable">
                     <table class="table">
