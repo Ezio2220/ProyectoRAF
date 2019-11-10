@@ -84,7 +84,7 @@ for(var i=0;i<arreglo.length;i++){
     detax = document.getElementById(arreglo[i]).options.selectedIndex;
       det= document.getElementById(arreglo[i]).options.item(detax).text;
       obj[arreglo[i]]=det;
-  }else if (arreglo[i]=="detalle"){
+  }else if (arreglo[i]=="detalle" && tbl!="paquete"){
     var sel = document.getElementById(arreglo[i]).selectedOptions;
     var det="";
     for(var j=0;j<sel.length;j++){
