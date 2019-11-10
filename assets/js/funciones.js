@@ -1281,7 +1281,7 @@ function salir(){
 function comprobar(){
   //mientras se hacen pruebas..
   if(clave.getItem('active')==null){
-    nowuiDashboard.showNotification('top','center',"<b>Debe iniciar sesion!</b>","danger");
+    nowuiDashboard.showNotification('top','center',"<b>Debe iniciar sesion!</b>","danger",1000);
       setTimeout(function(){window.location.href = base+'login/index.html';},1000);
   }else{
       var db = firebase.database().ref("Usuarios");
@@ -1291,7 +1291,7 @@ function comprobar(){
           if(data==clave.getItem('active')){
             if(aux[data].Estado==0){
               clave.removeItem('active');
-              nowuiDashboard.showNotification('top','center',"<b>Se Cerro la Sesion en otro Dispositivo!</b>","danger");
+              nowuiDashboard.showNotification('top','center',"<b>Se Cerro la Sesion en otro Dispositivo!</b>","danger",1000);
               setTimeout(function(){location.reload()},1500);
             }
           }
@@ -1303,11 +1303,11 @@ function comprobar(){
       var user = clave.getItem('active');
       console.log(user);
       if(user.substring(0,2)=="AD"){
-        nowuiDashboard.showNotification('top','center',"<b>Bienvenido ADMIN!</b>","success");
+        nowuiDashboard.showNotification('top','center',"<b>Bienvenido ADMIN!</b>","success",1000);
        // document.getElementsByClassName("adm")
         document.head.innerHTML= document.head.innerHTML+"<style> .adm{ display:unset;} </style>"
       }else{
-        nowuiDashboard.showNotification('top','center',"<b>Bienvenido!</b>","success");
+        nowuiDashboard.showNotification('top','center',"<b>Bienvenido!</b>","success",1000);
       }
      
   }

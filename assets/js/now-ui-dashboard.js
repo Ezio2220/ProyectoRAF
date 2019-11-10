@@ -140,7 +140,7 @@ nowuiDashboard = {
     navbar_menu_visible: 0
   },
 
-  showNotification: function(from, align,text,cl) {//agrege el atributo texto para modificar el texto de las notificaciones
+  showNotification: function(from, align,text,cl,tmp=8000) {//agrege el atributo texto para modificar el texto de las notificaciones
     color = cl;       //agrege el color para tambien elegirlo //esto esta cambiado en el .min pero no lo comente alli xD
 
     $.notify({
@@ -149,7 +149,7 @@ nowuiDashboard = {
 
     }, {
       type: color,
-      timer: 8000,
+      timer: tmp,
       placement: {
         from: from,
         align: align
