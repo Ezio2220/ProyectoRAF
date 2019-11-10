@@ -1264,7 +1264,7 @@ function pr(ll){
 //----------------------------------------------------------------------------SESIONES--------------------------------------
 const clave = window.localStorage;
 //"D:/works/0/2019/TSI/ProyectoRAF/";
-const base ="https://ezio2220.github.io/ProyectoRAF/";
+const base ="D:/works/0/2019/TSI/ProyectoRAF/";//"https://ezio2220.github.io/ProyectoRAF/";
 
 function salir(){
   console.log(clave.getItem('active'));
@@ -1279,6 +1279,7 @@ function salir(){
   nowuiDashboard.showNotification('top','center',"<b>Cerrando Sesion..</b>","warning");
   setTimeout(function(){window.location.href = base+'login/index.html';},1000);
 }
+
 function comprobar(){
   //mientras se hacen pruebas..
   if(clave.getItem('active')==null){
