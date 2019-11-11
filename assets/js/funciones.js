@@ -326,17 +326,29 @@ function update(tbl,id){
     }
     case "Proveedores":{
       var obj = new Object;
-      obj["detalle"]=obtener("detalle1");
+      var sel = document.getElementById("detalle1").selectedOptions;
+      var det="";
+      for(var j=0;j<sel.length;j++){
+        det+=sel[0].label;
+        if(j!=sel.length-1){
+          det+=",";
+        }
+      }
+      obj["detalle"]=det;
+
       obj["nombre"]=obtener("nombre1");
       obj["telefono"]=obtener("telefono1");
       break;
     }
     case "Ventas":{
       var obj = new Object;
-      obj["cliente"]=obtener("cliente1");
-
-      var n = document.getElementById("dettable1").rows.length;
       var det = "";      var detax ;
+      detax = document.getElementById("cliente1").options.selectedIndex;
+      det = document.getElementById("cliente1").options.item(detax).text;
+      obj["cliente"]=det;
+      det="";
+      var n = document.getElementById("dettable1").rows.length;
+      
       for(var j =1;j<n;j++){
         console.log("producto N 5"+j);
         detax = document.getElementById("d5"+j).options.selectedIndex;
@@ -349,15 +361,21 @@ function update(tbl,id){
       obj["fecha"]=obtener("fecha1");
       obj["tipopago"]=obtener("tipopago1");
       obj["total"]=obtener("total1");
-      obj["vendedor"]=obtener("vendedor1");
+      det="";
+      detax = document.getElementById("vendedor1").options.selectedIndex;
+      det = document.getElementById("vendedor1").options.item(detax).text;
+      obj["vendedor"]=det;
       break;
     }
     case "Foto":{
       console.log("fotox1");
       var obj = new Object;
-      obj["cliente"]=obtener("cliente1");
-      var n = document.getElementById("dettable1").rows.length;
       var det = "";      var detax ;
+      detax = document.getElementById("cliente1").options.selectedIndex;
+      det = document.getElementById("cliente1").options.item(detax).text;
+      obj["cliente"]=det;
+      det="";
+      var n = document.getElementById("dettable1").rows.length;
       for(var j =1;j<n;j++){
         console.log("producto N 5"+j);
         detax = document.getElementById("d5"+j).options.selectedIndex;
@@ -370,7 +388,10 @@ function update(tbl,id){
       obj["fecha"]=obtener("fecha1");
       obj["tipopago"]=obtener("tipopago1");
       obj["total"]=obtener("total1");
-      obj["vendedor"]=obtener("vendedor1");
+      det="";
+      detax = document.getElementById("vendedor1").options.selectedIndex;
+      det = document.getElementById("vendedor1").options.item(detax).text;
+      obj["vendedor"]=det;
       console.log(obj);
       break;
     }
@@ -461,7 +482,7 @@ switch(tbl){
                     "<div class='col-md-6 pr-1'>"+
                       "<div class='form-group'>"+
                         "<label>Usuarios</label>"+
-                        "<input id='usuario1' type='text' class='form-control' placeholder='User' value=''>"+
+                        "<select onmouseover=\"cargardatos(this.id,'Usuarios','Nombre',0,1);\" class='form-control'  name='usuario' id='usuario1'></select>"+
                       "</div>"+
                     "</div>"+
                   "</div>"+
@@ -1020,7 +1041,7 @@ db.once("value",function(snap){
           c = aux[j];
           camp = c[campo];
           data.text=camp;
-          data.value=documento;
+          data.value=j;
           lista.add(data);
           console.log(camp);
         }
