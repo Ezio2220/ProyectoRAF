@@ -1272,7 +1272,7 @@ function pr(ll){
 //----------------------------------------------------------------------------SESIONES--------------------------------------
 const clave = window.localStorage;
 //"D:/works/0/2019/TSI/ProyectoRAF/";
-const base ="https://ezio2220.github.io/ProyectoRAF/";
+const base = "C:/Users/Alejandro/Documents/GitHub/ProyectoRAF/";//"https://ezio2220.github.io/ProyectoRAF/";
 
 function salir(){
   console.log(clave.getItem('active'));
@@ -1320,5 +1320,21 @@ function comprobar(){
         nowuiDashboard.showNotification('top','center',"<b>Bienvenido!</b>","success",1000);
       }
      
+  }
+}
+function solonumeros(e){
+  var key = e.keyCod || e.which;
+  var teclado = String.fromCharCode(key);
+  var numero="0-1-2-3-4-5-6-7-8-9";
+  var especiales = "8-37-38-46";
+  var tecladoS = false;
+
+  for (var i in especiales) {
+    if (key==especiales[i]) {
+      tecladoS=true;
+    }
+  }
+  if (numero.indexOf(teclado)==-1 && !tecladoS) {
+    return false;
   }
 }
